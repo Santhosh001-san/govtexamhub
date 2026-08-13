@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>General Awareness Dashboard - GovtExamHub</title>
+    <meta name="description" content="Prepare General Awareness for SSC CGL. Learn Indian History, Indian Polity, Geography, Economics, General Science, Environment, notes and quizzes.">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header>
+    <h1>GovtExamHub</h1>
+    <p>General Awareness Preparation Dashboard</p>
+    <nav>
+        <a href="index.html">Home</a>
+        <a href="ssc.html">Exams</a>
+        <a href="quantitative.html">Subjects</a>
+        <a href="current_affairs.html">Current Affairs</a>
+    </nav>
+</header>
+
+<main>
+    <div class="dashboard-container">
+        <!-- Sidebar -->
+        <div class="sidebar">
+            <div class="search-box">
+                <input type="text" id="search-input" placeholder="Search topics..." onkeyup="filterTopics()">
+            </div>
+            
+            <div class="progress-container">
+                <div class="progress-header">
+                    <span>Course Progress</span>
+                    <span id="progress-text">0%</span>
+                </div>
+                <div class="progress-bar-bg">
+                    <div class="progress-bar-fill" id="progress-bar"></div>
+                </div>
+            </div>
+
+            <div class="topic-list-container">
+                <ul class="topic-list" id="topic-list">
+                    <!-- Topics will be dynamically populated -->
+                </ul>
+            </div>
+        </div>
+
+        <!-- Content Panel -->
+        <div class="content-panel">
+            <div class="content-header">
+                <h2 id="topic-title">Select a Topic</h2>
+                <button class="mark-complete-btn" id="complete-btn" onclick="toggleTopicComplete()">
+                    <span class="chk-complete-icon"></span>
+                    <span id="btn-text">Mark as Completed</span>
+                </button>
+            </div>
+
+            <div class="study-notes" id="topic-notes">
+                <!-- Notes will be dynamically populated -->
+            </div>
+
+            <div class="quiz-section">
+                <h3>Practice Questions</h3>
+                <div id="quiz-container">
+                    <!-- Quiz questions will be dynamically populated -->
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+
+<footer>
+    <p>© 2026 GovtExamHub. All Rights Reserved.</p>
+</footer>
+
+<script>
+    const topicsData = {
+        "history": {
+            title: "Indian History",
+            notes: `
+                <section>
+                    <p><strong>Indian History</strong> is divided into three major eras: Ancient, Medieval, and Modern. In SSC CGL, Modern History and the National Movement have the maximum weightage.</p>
+                </section>
+                <section>
+                    <h3>Important Eras & Events</h3>
+                    <p><strong>1. Ancient India:</strong> Key highlights include the Indus Valley Civilization (major sites like Harappa, Mohenjo-daro), Vedic Age, Buddhism & Jainism, Maurya Dynasty (Chandragupta, Ashoka), and Gupta Empire ('Golden Age').</p>
+                    <p><strong>2. Medieval India:</strong> Tripartite struggle, Delhi Sultanate (Slave, Khilji, Tughlaq, Sayyid, Lodi dynasties), Mughal Empire (Babur, Akbar, Shah Jahan, Aurangzeb), and the Maratha empire.</p>
+                    <p><strong>3. Modern India:</strong> Advent of Europeans, Battle of Plassey (1757), Revolt of 1857, establishment of Indian National Congress (1885), Partition of Bengal (1905), and Gandhian Era (Non-Cooperation, Civil Disobedience, Quit India movements).</p>
+                </section>
+            `,
+            formula: "Create a <strong>chronological timeline of events</strong> (wars, treaties, acts, congress sessions). This makes remembering dates much easier.",
+            quiz: [
+                {
+                    q: "The first Buddhist Council was held at which place?",
+                    options: ["Rajgriha", "Vaishali", "Pataliputra", "Kashmir"],
+                    ans: 0,
+                    exp: "The first council was held at Rajgriha immediately after the Buddha's Mahaparinirvana, under the patronage of King Ajatashatru."
+                },
+                {
+                    q: "Who was the Mughal Emperor during the Revolt of 1857?",
+                    options: ["Bahadur Shah Zafar", "Shah Alam II", "Akbar II", "Farrukhsiyar"],
+                    ans: 0,
+                    exp: "Bahadur Shah Zafar (Bahadur Shah II) was the last Mughal Emperor. He was declared the leader of the 1857 rebellion by the mutinous sepoys."
+                },
+                {
+                    q: "In which year did Mahatma Gandhi lead the famous Dandi March?",
+                    options: ["1930", "1920", "1942", "1915"],
+                    ans: 0,
+                    exp: "The Dandi March (Salt Satyagraha) began on March 12, 1930, and concluded on April 6, 1930, launching the Civil Disobedience Movement."
+                }
+            ]
+        },
+        "polity": {
+            title: "Indian Polity",
+            notes: `
+                <section>
+                    <p><strong>Indian Polity</strong> covers the Constitution of India, organs of governance, administrative structures, and constitutional/non-constitutional bodies.</p>
+                </section>
+                <section>
+                    <h3>Core Pillars of Constitution</h3>
+                    <p><strong>1. Sources:</strong> Fundamental Rights borrowed from USA, Directive Principles (DPSP) from Ireland, Parliamentary system from UK.</p>
+                    <p><strong>2. Fundamental Rights (Part III, Articles 12-35):</strong> Six rights (Equality, Freedom, Against Exploitation, Freedom of Religion, Cultural & Educational, Constitutional Remedies).</p>
+                    <p><strong>3. The President:</strong> Executive head of the state. Appoints Prime Minister, Governors, Chief Justice of India.</p>
+                    <p><strong>4. Parliament:</strong> Consists of the President, Rajya Sabha (Upper House), and Lok Sabha (Lower House).</p>
+                </section>
+            `,
+            formula: "Memorize <strong>important Constitutional Articles</strong> (Article 324 - Election Commission, Article 356 - President's Rule, Article 368 - Amendment). Make short flashcards.",
+            quiz: [
+                {
+                    q: "Which Article is referred to as the 'Heart and Soul of the Constitution' by Dr. B.R. Ambedkar?",
+                    options: ["Article 32", "Article 21", "Article 14", "Article 19"],
+                    ans: 0,
+                    exp: "Article 32 (Right to Constitutional Remedies) allows individuals to petition the Supreme Court for enforcement of their Fundamental Rights."
+                },
+                {
+                    q: "What is the minimum age required to become the President of India?",
+                    options: ["35 years", "30 years", "25 years", "18 years"],
+                    ans: 0,
+                    exp: "Article 58 specifies that a candidate must be at least 35 years old to run for the office of the President of India."
+                },
+                {
+                    q: "Who appoints the Chairman of the Union Public Service Commission (UPSC)?",
+                    options: ["The President", "The Prime Minister", "The Chief Justice of India", "The Parliament"],
+                    ans: 0,
+                    exp: "The Chairman and other members of the UPSC are appointed by the President of India under Article 316."
+                }
+            ]
+        },
+        "geography": {
+            title: "Geography",
+            notes: `
+                <section>
+                    <p><strong>Geography</strong> covers Physical Geography, Indian Geography, and World Geography. SSC exams focus heavily on Indian rivers, soils, crops, national parks, and mineral reserves.</p>
+                </section>
+                <section>
+                    <h3>Important Highlights</h3>
+                    <p><strong>Indian River Systems:</strong> Himalayan Rivers (perennial - Indus, Ganga, Brahmaputra) and Peninsular Rivers (seasonal - Godavari, Krishna, Cauvery, Narmada, Tapi).</p>
+                    <p><strong>Atmospheric Layers:</strong> Troposphere (weather changes, lowest), Stratosphere (contains ozone, jet flights), Mesosphere, Thermosphere, Exosphere.</p>
+                    <p><strong>Borders:</strong> India shares its longest land boundary with Bangladesh, followed by China and Pakistan.</p>
+                </section>
+            `,
+            formula: "Use <strong>maps</strong> to study geographical details (tributaries, mountain passes, ports, national parks). Visual mapping aids recall.",
+            quiz: [
+                {
+                    q: "Which is the largest river basin in India?",
+                    options: ["Ganga Basin", "Godavari Basin", "Indus Basin", "Brahmaputra Basin"],
+                    ans: 0,
+                    exp: "The Ganga Basin is the largest river basin in India, covering about 861,404 sq. km (26% of India's landmass)."
+                },
+                {
+                    q: "Which layer of the atmosphere contains the protective Ozone Layer?",
+                    options: ["Stratosphere", "Troposphere", "Mesosphere", "Thermosphere"],
+                    ans: 0,
+                    exp: "The ozone layer is concentrated in the lower portion of the Stratosphere (approx. 15 to 35 km above Earth), absorbing harmful UV rays."
+                },
+                {
+                    q: "With which country does India share its longest international border?",
+                    options: ["Bangladesh", "China", "Pakistan", "Nepal"],
+                    ans: 0,
+                    exp: "India shares a 4,096.7 km long land border with Bangladesh, the fifth-longest land border in the world."
+                }
+            ]
+        },
+        "economics": {
+            title: "Economics",
+            notes: `
+                <section>
+                    <p><strong>Indian Economics</strong> tests fundamental terminology, banking functions, budgetary concepts, and national growth metrics.</p>
+                </section>
+                <section>
+                    <h3>Core Concepts</h3>
+                    <p><strong>GDP (Gross Domestic Product):</strong> Market value of all finished goods/services produced within a country's borders in a specific period.</p>
+                    <p><strong>Monetary Policy Tools (RBI):</strong> Repo Rate (rate at which RBI lends to commercial banks), Reverse Repo Rate (rate at which RBI borrows from banks), Cash Reserve Ratio (CRR), Statutory Liquidity Ratio (SLR).</p>
+                    <p><strong>Fiscal Policy:</strong> Handled by the government (taxation and public spending).</p>
+                    <p><strong>Inflation Indicators:</strong> CPI (Retail level inflation, used as primary anchor) and WPI (Wholesale level inflation).</p>
+                </section>
+            `,
+            formula: "Understand key rates: <strong>Higher Repo Rate -> tighter money supply -> controls inflation</strong>. Focus on logical connections.",
+            quiz: [
+                {
+                    q: "What is the rate at which commercial banks borrow money from the RBI in the short term?",
+                    options: ["Repo Rate", "Reverse Repo Rate", "Bank Rate", "Statutory Liquidity Rate"],
+                    ans: 0,
+                    exp: "Repo (Repurchasing Option) Rate is the policy rate at which the RBI lends money to commercial banks to meet short-term liquidity demands."
+                },
+                {
+                    q: "Which type of economy is India classified as?",
+                    options: ["Mixed Economy", "Socialist Economy", "Capitalist Economy", "Traditional Economy"],
+                    ans: 0,
+                    exp: "India is a Mixed Economy as it combines features of both capitalist market forces and socialist state welfare planning."
+                },
+                {
+                    q: "In which year was the NITI Aayog established to replace the Planning Commission?",
+                    options: ["2015", "2014", "2016", "2017"],
+                    ans: 0,
+                    exp: "NITI Aayog (National Institution for Transforming India) was formed by a Cabinet resolution on January 1, 2015."
+                }
+            ]
+        },
+        "science": {
+            title: "General Science",
+            notes: `
+                <section>
+                    <p><strong>General Science</strong> covers daily life science concepts in Physics, Chemistry, and Biology up to class 10 standard.</p>
+                </section>
+                <section>
+                    <h3>Major Topics</h3>
+                    <p><strong>Physics:</strong> Units and dimensions, Newton's laws, work-energy-power, light (reflection, refraction, mirrors, lenses), gravity, and electricity.</p>
+                    <p><strong>Chemistry:</strong> States of matter, atomic structure, chemical reactions, acids-bases-salts (pH scale), carbon compounds, and metals/non-metals.</p>
+                    <p><strong>Biology:</strong> Cell structure (mitochondria - powerhouse), plant & animal kingdoms, human physiology (blood groups, hormones), nutrition & vitamins, and infectious diseases.</p>
+                </section>
+            `,
+            formula: "Focus on <strong>vitamins, chemical names of salts (Baking Soda, Washing Soda, Bleaching Powder), SI units, and mirrors/lenses rules</strong>.",
+            quiz: [
+                {
+                    q: "Which part of the human cell is known as the 'Powerhouse of the Cell'?",
+                    options: ["Mitochondria", "Nucleus", "Ribosome", "Lysosome"],
+                    ans: 0,
+                    exp: "Mitochondria are responsible for cellular respiration and generating ATP (energy currency), hence called the powerhouse."
+                },
+                {
+                    q: "What is the chemical name of Baking Soda?",
+                    options: ["Sodium Bicarbonate", "Sodium Carbonate", "Calcium Carbonate", "Sodium Chloride"],
+                    ans: 0,
+                    exp: "Baking soda is Sodium Bicarbonate (NaHCO3), whereas washing soda is Sodium Carbonate (Na2CO3)."
+                },
+                {
+                    q: "A magnifying glass or reading lens uses which type of lens?",
+                    options: ["Convex Lens", "Concave Lens", "Bifocal Lens", "Cylindrical Lens"],
+                    ans: 0,
+                    exp: "A Convex (converging) lens forms a magnified, virtual, and erect image when an object is placed close to it."
+                }
+            ]
+        },
+        "environment": {
+            title: "Environment & Ecology",
+            notes: `
+                <section>
+                    <p><strong>Environment</strong> questions touch upon ecosystems, food chains, trophic levels, environmental hazards, ozone layer protection, and biodiversity conservation sites.</p>
+                </section>
+                <section>
+                    <h3>Key Concepts & Summits</h3>
+                    <p><strong>Trophic Levels:</strong> Producers (Plants) -> Primary Consumers (Herbivores) -> Secondary Consumers (Carnivores) -> Tertiary Consumers (Apex predators). Energy transfer follows the 10% rule (only 10% energy is passed to the next level).</p>
+                    <p><strong>Ozone Protection:</strong> Montreal Protocol (1987) was signed to phase out Ozone Depleting Substances (like CFCs).</p>
+                    <p><strong>Climate Agreements:</strong> UNFCCC, Kyoto Protocol (greenhouse gases reduction), Paris Agreement (limit warming to under 2°C, preferably 1.5°C).</p>
+                </section>
+            `,
+            formula: "Check <strong>10% Energy Flow Rule</strong>. Know the difference between **In-situ** (National Parks) and **Ex-situ** (Zoo, Seed banks) conservation.",
+            quiz: [
+                {
+                    q: "The transfer of energy from one trophic level to another in an ecosystem follows which rule?",
+                    options: ["10% Law", "50% Law", "1% Law", "25% Law"],
+                    ans: 0,
+                    exp: "Introduced by Raymond Lindeman, the 10% Law states that only about 10% of the energy stored as organic matter is transferred to the next trophic level."
+                },
+                {
+                    q: "Which international treaty is specifically targeted towards phasing out ozone-depleting substances?",
+                    options: ["Montreal Protocol", "Kyoto Protocol", "Ramsar Convention", "Basel Convention"],
+                    ans: 0,
+                    exp: "The Montreal Protocol (1987) is a global agreement to protect the ozone layer by phasing out substances like Chlorofluorocarbons (CFCs)."
+                },
+                {
+                    q: "Ramsar Convention is an international treaty for the conservation of:",
+                    options: ["Wetlands", "Forests", "Endangered birds", "Marine habitats"],
+                    ans: 0,
+                    exp: "The Ramsar Convention (signed in Ramsar, Iran in 1971) is a treaty dedicated to the conservation and sustainable use of Wetlands."
+                }
+            ]
+        }
+    };
+
+    // Load URL topic or default
+    let activeTopic = "history";
+
+    function init() {
+        const urlParams = new URLSearchParams(window.location.search);
+        const topicParam = urlParams.get('topic');
+        if (topicParam && topicsData[topicParam]) {
+            activeTopic = topicParam;
+        }
+        renderTopicList();
+        loadTopic(activeTopic);
+        updateProgress();
+    }
+
+    function renderTopicList() {
+        const list = document.getElementById("topic-list");
+        list.innerHTML = "";
+        
+        Object.keys(topicsData).forEach(key => {
+            const topic = topicsData[key];
+            const isCompleted = localStorage.getItem(`general_${key}`) === 'completed';
+            
+            const li = document.createElement("li");
+            li.className = `topic-item ${key === activeTopic ? 'active' : ''} ${isCompleted ? 'completed' : ''}`;
+            li.id = `item-${key}`;
+            li.setAttribute("onclick", `selectTopic('${key}')`);
+            
+            li.innerHTML = `
+                <span>${topic.title}</span>
+                <span class="chk-complete"></span>
+            `;
+            list.appendChild(li);
+        });
+    }
+
+    function selectTopic(key) {
+        activeTopic = key;
+        
+        // Update active class in sidebar
+        document.querySelectorAll(".topic-item").forEach(item => {
+            item.classList.remove("active");
+        });
+        document.getElementById(`item-${key}`).classList.add("active");
+        
+        // Push state to URL without reloading
+        const newUrl = window.location.protocol + "//" + window.location.host + window.location.pathname + '?topic=' + key;
+        window.history.pushState({path: newUrl}, '', newUrl);
+
+        loadTopic(key);
+    }
+
+    function loadTopic(key) {
+        const topic = topicsData[key];
+        document.getElementById("topic-title").innerText = topic.title;
+        
+        // Populate Notes & Formula Box
+        document.getElementById("topic-notes").innerHTML = `
+            ${topic.notes}
+            <div class="formula-box">
+                <strong>Tips & Key Concept:</strong> ${topic.formula}
+            </div>
+        `;
+
+        // Update Complete Button
+        const isCompleted = localStorage.getItem(`general_${key}`) === 'completed';
+        const btn = document.getElementById("complete-btn");
+        const btnText = document.getElementById("btn-text");
+        if (isCompleted) {
+            btn.classList.add("completed");
+            btnText.innerText = "Completed";
+        } else {
+            btn.classList.remove("completed");
+            btnText.innerText = "Mark as Completed";
+        }
+
+        // Load Quiz
+        const quizContainer = document.getElementById("quiz-container");
+        quizContainer.innerHTML = "";
+        
+        topic.quiz.forEach((qObj, index) => {
+            const card = document.createElement("div");
+            card.className = "quiz-card";
+            
+            let optionsHTML = "";
+            qObj.options.forEach((opt, optIndex) => {
+                optionsHTML += `
+                    <li class="quiz-option" onclick="checkAnswer(this, ${index}, ${optIndex}, ${qObj.ans})">${opt}</li>
+                `;
+            });
+
+            card.innerHTML = `
+                <div class="quiz-question">Q${index + 1}: ${qObj.q}</div>
+                <ul class="quiz-options">
+                    ${optionsHTML}
+                </ul>
+                <button class="reveal-btn" onclick="toggleExplanation(${index})">Show Answer & Explanation</button>
+                <div class="explanation" id="exp-${index}">${qObj.exp}</div>
+            `;
+            quizContainer.appendChild(card);
+        });
+    }
+
+    function checkAnswer(element, questionIndex, selectedIndex, correctIndex) {
+        const parent = element.parentElement;
+        const options = parent.querySelectorAll(".quiz-option");
+        
+        // Disable multiple clicks
+        options.forEach(opt => {
+            opt.style.pointerEvents = "none";
+        });
+
+        if (selectedIndex === correctIndex) {
+            element.classList.add("correct");
+        } else {
+            element.classList.add("wrong");
+            options[correctIndex].classList.add("correct");
+        }
+        
+        toggleExplanation(questionIndex, true);
+    }
+
+    function toggleExplanation(index, forceShow = false) {
+        const expDiv = document.getElementById(`exp-${index}`);
+        if (forceShow || expDiv.style.display === "none" || !expDiv.style.display) {
+            expDiv.style.display = "block";
+        } else {
+            expDiv.style.display = "none";
+        }
+    }
+
+    function toggleTopicComplete() {
+        const key = activeTopic;
+        const isCompleted = localStorage.getItem(`general_${key}`) === 'completed';
+        const sidebarItem = document.getElementById(`item-${key}`);
+        const btn = document.getElementById("complete-btn");
+        const btnText = document.getElementById("btn-text");
+
+        if (isCompleted) {
+            localStorage.removeItem(`general_${key}`);
+            sidebarItem.classList.remove("completed");
+            btn.classList.remove("completed");
+            btnText.innerText = "Mark as Completed";
+        } else {
+            localStorage.setItem(`general_${key}`, 'completed');
+            sidebarItem.classList.add("completed");
+            btn.classList.add("completed");
+            btnText.innerText = "Completed";
+        }
+        
+        updateProgress();
+    }
+
+    function updateProgress() {
+        const total = Object.keys(topicsData).length;
+        let completed = 0;
+        
+        Object.keys(topicsData).forEach(key => {
+            if (localStorage.getItem(`general_${key}`) === 'completed') {
+                completed++;
+            }
+        });
+
+        const percent = Math.round((completed / total) * 100);
+        document.getElementById("progress-bar").style.width = percent + "%";
+        document.getElementById("progress-text").innerText = percent + "%";
+    }
+
+    function filterTopics() {
+        const input = document.getElementById("search-input").value.toLowerCase();
+        const items = document.querySelectorAll(".topic-item");
+        
+        items.forEach(item => {
+            const text = item.innerText.toLowerCase();
+            if (text.includes(input)) {
+                item.style.display = "flex";
+            } else {
+                item.style.display = "none";
+            }
+        });
+    }
+
+    window.onload = init;
+</script>
+</body>
+</html>

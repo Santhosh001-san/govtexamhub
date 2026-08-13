@@ -1,0 +1,744 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>English Language Dashboard - GovtExamHub</title>
+    <meta name="description" content="Prepare English Language and Comprehension for SSC CGL. Learn grammar, rules, vocabulary, idioms, one word substitution, error spotting and quizzes.">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header>
+    <h1>GovtExamHub</h1>
+    <p>English Language & Comprehension Preparation Dashboard</p>
+    <nav>
+        <a href="index.html">Home</a>
+        <a href="ssc.html">Exams</a>
+        <a href="quantitative.html">Subjects</a>
+        <a href="current_affairs.html">Current Affairs</a>
+    </nav>
+</header>
+
+<main>
+    <div class="dashboard-container">
+        <!-- Sidebar -->
+        <div class="sidebar">
+            <div class="search-box">
+                <input type="text" id="search-input" placeholder="Search topics..." onkeyup="filterTopics()">
+            </div>
+            
+            <div class="progress-container">
+                <div class="progress-header">
+                    <span>Course Progress</span>
+                    <span id="progress-text">0%</span>
+                </div>
+                <div class="progress-bar-bg">
+                    <div class="progress-bar-fill" id="progress-bar"></div>
+                </div>
+            </div>
+
+            <div class="topic-list-container">
+                <ul class="topic-list" id="topic-list">
+                    <!-- Topics will be dynamically populated -->
+                </ul>
+            </div>
+        </div>
+
+        <!-- Content Panel -->
+        <div class="content-panel">
+            <div class="content-header">
+                <h2 id="topic-title">Select a Topic</h2>
+                <button class="mark-complete-btn" id="complete-btn" onclick="toggleTopicComplete()">
+                    <span class="chk-complete-icon"></span>
+                    <span id="btn-text">Mark as Completed</span>
+                </button>
+            </div>
+
+            <div class="study-notes" id="topic-notes">
+                <!-- Notes will be dynamically populated -->
+            </div>
+
+            <div class="quiz-section">
+                <h3>Practice Questions</h3>
+                <div id="quiz-container">
+                    <!-- Quiz questions will be dynamically populated -->
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+
+<footer>
+    <p>© 2026 GovtExamHub. All Rights Reserved.</p>
+</footer>
+
+<script>
+    const topicsData = {
+        "parts-of-speech": {
+            title: "Parts of Speech",
+            notes: `
+                <section>
+                    <p><strong>Parts of Speech</strong> form the foundation of English grammar. Every word in a sentence plays a specific role belonging to one of the eight categories.</p>
+                </section>
+                <section>
+                    <h3>The Eight Parts of Speech</h3>
+                    <p><strong>1. Noun:</strong> Name of a person, place, thing, or idea. (e.g., London, Rohit, happiness)</p>
+                    <p><strong>2. Pronoun:</strong> Replaces a noun to avoid repetition. (e.g., he, she, they, it)</p>
+                    <p><strong>3. Verb:</strong> Expresses action or state of being. (e.g., run, write, is, are)</p>
+                    <p><strong>4. Adjective:</strong> Modifies or describes a noun or pronoun. (e.g., beautiful, blue, tall)</p>
+                    <p><strong>5. Adverb:</strong> Modifies a verb, adjective, or another adverb. (e.g., slowly, very, yesterday)</p>
+                    <p><strong>6. Preposition:</strong> Shows relationship of a noun/pronoun to another word. (e.g., in, on, under, with)</p>
+                    <p><strong>7. Conjunction:</strong> Connects words, phrases, or clauses. (e.g., and, but, because, although)</p>
+                    <p><strong>8. Interjection:</strong> Expresses sudden strong emotion. (e.g., Oh!, Alas!, Wow!)</p>
+                </section>
+            `,
+            formula: "Identify the word's <strong>function in the sentence</strong>. A word like 'run' can be a verb ('I run fast') or a noun ('I went for a run').",
+            quiz: [
+                {
+                    q: "Identify the part of speech of the bold word: She walked <b>very</b> slowly.",
+                    options: ["Adjective", "Adverb", "Verb", "Preposition"],
+                    ans: 1,
+                    exp: "'Slowly' is an adverb describing how she walked. 'Very' is an adverb modifying the adverb 'slowly'."
+                },
+                {
+                    q: "Which of the following bold words is a Conjunction?",
+                    options: [
+                        "I went to the store, <b>but</b> it was closed.",
+                        "She placed the keys <b>on</b> the table.",
+                        "The <b>brave</b> soldier fought well.",
+                        "He runs <b>everyday</b>."
+                    ],
+                    ans: 0,
+                    exp: "'But' connects two independent clauses, making it a coordinating conjunction."
+                },
+                {
+                    q: "Identify the noun in: 'The beauty of the sunset amazed them.'",
+                    options: ["beauty", "amazed", "them", "sunset", "Both 'beauty' and 'sunset'"],
+                    ans: 4,
+                    exp: "Both 'beauty' (abstract noun) and 'sunset' (concrete noun) are nouns in this sentence."
+                }
+            ]
+        },
+        "subject-verb-agreement": {
+            title: "Subject-Verb Agreement",
+            notes: `
+                <section>
+                    <p><strong>Subject-Verb Agreement</strong> is the basic rule stating that a singular subject takes a singular verb, while a plural subject takes a plural verb.</p>
+                </section>
+                <section>
+                    <h3>Important Rules for SSC CGL</h3>
+                    <p><strong>Rule 1:</strong> When two subjects are connected by 'and', they take a plural verb. (e.g., Gold and silver are precious.)</p>
+                    <p><strong>Rule 2:</strong> If two subjects are connected by 'either... or' or 'neither... nor', the verb agrees with the nearest subject. (e.g., Neither Ram nor his brothers are coming.)</p>
+                    <p><strong>Rule 3:</strong> Collective nouns (family, class, jury) take a singular verb when acting as a single unit, and a plural verb when members act individually.</p>
+                    <p><strong>Rule 4:</strong> Words like 'each', 'everyone', 'someone', 'nobody' are singular and take singular verbs.</p>
+                </section>
+            `,
+            formula: "Identify the <strong>true subject</strong> of the sentence. Ignore prepositional phrases between the subject and the verb.",
+            quiz: [
+                {
+                    q: "Neither the manager nor the employees ___ present at the meeting.",
+                    options: ["was", "were", "is", "has been"],
+                    ans: 1,
+                    exp: "With 'neither... nor', the verb agrees with the closest subject, 'employees' (plural), so 'were' is correct."
+                },
+                {
+                    q: "A basket of apples ___ kept in the kitchen.",
+                    options: ["are", "is", "have been", "were"],
+                    ans: 1,
+                    exp: "The subject is 'A basket' (singular), not 'apples' (prepositional object). Hence, the verb must be singular ('is')."
+                },
+                {
+                    q: "The jury ___ divided in their opinions.",
+                    options: ["was", "were", "is", "has been"],
+                    ans: 1,
+                    exp: "When the members of a collective noun ('jury') act individually or have different opinions, the verb is plural ('were')."
+                }
+            ]
+        },
+        "tenses": {
+            title: "Tenses",
+            notes: `
+                <section>
+                    <p><strong>Tenses</strong> describe when an action takes place: Past, Present, or Future. Each has four forms: Simple, Continuous, Perfect, and Perfect Continuous.</p>
+                </section>
+                <section>
+                    <h3>Key Highlights</h3>
+                    <p><strong>Present Perfect vs Simple Past:</strong> Use Simple Past for actions completed at a specific past time (e.g., 'I met him yesterday'). Use Present Perfect for actions linked to the present (e.g., 'I have met him before').</p>
+                    <p><strong>Since and For:</strong> 'Since' is used for a point of time (since 2012, since morning). 'For' is used for a duration (for 5 hours, for 2 years) in Perfect Continuous tenses.</p>
+                    <p><strong>Conditional Clause Tense:</strong> If the main clause is future tense, the conditional clause is in simple present. (e.g., 'If it rains, we will cancel the game', not 'If it will rain').</p>
+                </section>
+            `,
+            formula: "Check for time markers in the sentence: <strong>'yesterday' -> past; 'already' -> perfect; 'since/for' -> perfect continuous</strong>.",
+            quiz: [
+                {
+                    q: "If I ___ rich, I would help the poor.",
+                    options: ["am", "was", "were", "would be"],
+                    ans: 2,
+                    exp: "This is a hypothetical conditional (Type 2). We use subjunctive 'were' for all subjects."
+                },
+                {
+                    q: "She ___ here since 2015.",
+                    options: ["is living", "has been living", "was living", "lived"],
+                    ans: 1,
+                    exp: "The marker 'since 2015' indicates an action that started in the past and is still ongoing. We use Present Perfect Continuous ('has been living')."
+                },
+                {
+                    q: "By next month, we ___ this project.",
+                    options: ["will finish", "will have finished", "finish", "would finish"],
+                    ans: 1,
+                    exp: "The marker 'By next month' signals an action completed before a future point. Use Future Perfect ('will have finished')."
+                }
+            ]
+        },
+        "articles": {
+            title: "Articles",
+            notes: `
+                <section>
+                    <p><strong>Articles</strong> are noun modifiers. They are divided into Indefinite Articles (A, An) and Definite Articles (The).</p>
+                </section>
+                <section>
+                    <h3>Usage Rules</h3>
+                    <p><strong>A vs An:</strong> Based on the sound of the word, not spelling! Use 'An' for vowel sounds (e.g., an hour, an MLA, an honest man) and 'A' for consonant sounds (e.g., a university, a one-eyed man).</p>
+                    <p><strong>The Definite Article:</strong> Used for unique objects, superlatves, rivers, oceans, holy books, directions, or previously mentioned nouns. (e.g., the Sun, the highest peak, the Ganges).</p>
+                    <p><strong>Omission of Articles:</strong> Do not use articles before names of languages, subjects, sports, meals, or abstract qualities unless specified.</p>
+                </section>
+            `,
+            formula: "Pronounce the word! <strong>Vowel sound -> 'an'; Consonant sound -> 'a'</strong>. Use <strong>'the' for specifics and superlatives</strong>.",
+            quiz: [
+                {
+                    q: "He is ___ university student studying history.",
+                    options: ["a", "an", "the", "no article"],
+                    ans: 0,
+                    exp: "'University' begins with a consonant sound '/ju:/' (yu), so it takes the indefinite article 'a'."
+                },
+                {
+                    q: "___ Nile is the longest river in the world.",
+                    options: ["A", "An", "The", "no article"],
+                    ans: 2,
+                    exp: "We always use the definite article 'The' before names of rivers ('The Nile')."
+                },
+                {
+                    q: "She returned after ___ hour.",
+                    options: ["a", "an", "the", "no article"],
+                    ans: 1,
+                    exp: "The 'h' in 'hour' is silent. It starts with a vowel sound (ow-er), so it takes 'an'."
+                }
+            ]
+        },
+        "prepositions": {
+            title: "Prepositions",
+            notes: `
+                <section>
+                    <p><strong>Prepositions</strong> show relations of time, place, and direction. SSC exams frequently test Fixed Prepositions (verbs/adjectives followed by specific prepositions).</p>
+                </section>
+                <section>
+                    <h3>Important Prepositions</h3>
+                    <p><strong>Between vs Among:</strong> 'Between' is generally for two entities (e.g., between Ram and Sham). 'Among' is for more than two (e.g., among the students).</p>
+                    <p><strong>Since vs For:</strong> 'Since' denotes starting point, 'For' denotes duration.</p>
+                    <p><strong>Fixed Examples:</strong> Abstain from, Abide by, Accused of, Congratulate on, Cope with (not 'cope up with'), Prefer to (not 'prefer than').</p>
+                </section>
+            `,
+            formula: "Learn <strong>fixed preposition combinations</strong> (e.g., 'suffer from', 'differ with', 'agree to/with') as they are the most common source of error in exam papers.",
+            quiz: [
+                {
+                    q: "I prefer tea ___ coffee.",
+                    options: ["than", "to", "over", "from"],
+                    ans: 1,
+                    exp: "'Prefer' is always followed by the preposition 'to' when making comparisons."
+                },
+                {
+                    q: "He died ___ cholera after drinking contaminated water.",
+                    options: ["from", "of", "with", "by"],
+                    ans: 1,
+                    exp: "When someone dies of a disease, the fixed preposition is 'of'. (e.g., died of malaria, cancer, cholera)."
+                },
+                {
+                    q: "The thief jumped ___ the wall and escaped.",
+                    options: ["over", "under", "in", "through"],
+                    ans: 0,
+                    exp: "Movement across from one side to another at a height takes 'over'."
+                }
+            ]
+        },
+        "active-passive": {
+            title: "Active & Passive Voice",
+            notes: `
+                <section>
+                    <p>In <strong>Active Voice</strong>, the subject performs the action. In <strong>Passive Voice</strong>, the subject receives the action. Voice changes are a major scoring section in SSC CGL Tier-1 and Tier-2.</p>
+                </section>
+                <section>
+                    <h3>Conversion Formula Chart</h3>
+                    <p><strong>Simple Present:</strong> V1 -> is/am/are + V3</p>
+                    <p><strong>Simple Past:</strong> V2 -> was/were + V3</p>
+                    <p><strong>Continuous:</strong> verb+ing -> being + V3</p>
+                    <p><strong>Perfect:</strong> has/have/had + V3 -> has/have/had + been + V3</p>
+                    <p><strong>Modal verbs:</strong> will/can/must + V1 -> will/can/must + be + V3</p>
+                </section>
+            `,
+            formula: "Check the <strong>tense of the active sentence</strong>. The passive sentence MUST remain in the same tense, but takes the auxiliary + V3 verb form.",
+            quiz: [
+                {
+                    q: "Change to Passive: 'The postman delivers the letters.'",
+                    options: [
+                        "The letters were delivered by the postman.",
+                        "The letters are delivered by the postman.",
+                        "The letters are being delivered by the postman.",
+                        "The letters have been delivered by the postman."
+                    ],
+                    ans: 1,
+                    exp: "'Delivers' is simple present. The passive form is: Object ('The letters') + are + V3 ('delivered') + by subject. Hence: 'The letters are delivered by the postman.'"
+                },
+                {
+                    q: "Change to Passive: 'Someone has stolen my pen.'",
+                    options: [
+                        "My pen is stolen.",
+                        "My pen was stolen.",
+                        "My pen has been stolen.",
+                        "My pen had been stolen."
+                    ],
+                    ans: 2,
+                    exp: "'Has stolen' is present perfect. The passive form is: 'My pen has been stolen'. (By 'someone' is omitted as it is indefinite)."
+                },
+                {
+                    q: "Change to Passive: 'Open the door.'",
+                    options: [
+                        "Let the door open.",
+                        "Let the door be opened.",
+                        "The door should open.",
+                        "You are requested to open the door."
+                    ],
+                    ans: 1,
+                    exp: "For imperative sentences, the passive structure is: 'Let + Object + be + V3'. Hence, 'Let the door be opened.'"
+                }
+            ]
+        },
+        "direct-indirect": {
+            title: "Direct & Indirect Speech",
+            notes: `
+                <section>
+                    <p><strong>Direct Speech</strong> quotes exact words. <strong>Indirect Speech</strong> reports the words without quoting them exactly. Changing speech involves shifting tenses, pronouns, and time/place words.</p>
+                </section>
+                <section>
+                    <h3>Shifting Rules</h3>
+                    <p><strong>Tense Shift:</strong> Simple Present -> Simple Past, Present Continuous -> Past Continuous, Present Perfect -> Past Perfect, Simple Past -> Past Perfect.</p>
+                    <p><strong>Time/Place Shifts:</strong> now -> then, today -> that day, yesterday -> the previous day, tomorrow -> the next day, this -> that, here -> there.</p>
+                    <p><strong>Interrogative Sentences:</strong> Remove 'that'. If it is a Yes/No question, use 'if' or 'whether'. If it is a Wh- question, use the Wh- word itself.</p>
+                </section>
+            `,
+            formula: "Check the <strong>reporting verb</strong>. If it is in present/future (says/will say), tenses inside the quotation do NOT change. If it is past (said), apply the tense shift.",
+            quiz: [
+                {
+                    q: "Change to Indirect: He said to me, 'I am reading a book.'",
+                    options: [
+                        "He told me that he was reading a book.",
+                        "He said me that he is reading a book.",
+                        "He told me that I was reading a book.",
+                        "He asked me if he was reading a book."
+                    ],
+                    ans: 0,
+                    exp: "'Said to' changes to 'told'. Pronoun 'I' shifts to 'he' (matching subject). Present Continuous 'am reading' shifts to Past Continuous 'was reading'. Hence, 'He told me that he was reading a book.'"
+                },
+                {
+                    q: "Change to Indirect: She said, 'I went to London yesterday.'",
+                    options: [
+                        "She said that she had gone to London the previous day.",
+                        "She said that she went to London yesterday.",
+                        "She said that she has gone to London the previous day.",
+                        "She told that she went to London the previous day."
+                    ],
+                    ans: 0,
+                    exp: "Simple past 'went' shifts to past perfect 'had gone'. 'Yesterday' shifts to 'the previous day'. Hence, 'She said that she had gone to London the previous day.'"
+                },
+                {
+                    q: "Change to Indirect: The teacher says, 'The earth is round.'",
+                    options: [
+                        "The teacher said that the earth was round.",
+                        "The teacher says that the earth is round.",
+                        "The teacher says that the earth was round.",
+                        "The teacher told that the earth is round."
+                    ],
+                    ans: 1,
+                    exp: "Two rules apply here: 1. If reporting verb is in present ('says'), no tense shift occurs. 2. Universal truths ('The earth is round') never change tense."
+                }
+            ]
+        },
+        "synonyms-antonyms": {
+            title: "Synonyms and Antonyms",
+            notes: `
+                <section>
+                    <p>Vocabulary contributes to a major chunk of the English paper in SSC CGL. Memorising synonyms (words with similar meanings) and antonyms (words with opposite meanings) requires root word analysis and regular reading.</p>
+                </section>
+                <section>
+                    <h3>Important Words & Roots</h3>
+                    <p><strong>Bene:</strong> Good/Well (e.g., Benevolent - kind, Beneficial - helpful, Benign - harmless).</p>
+                    <p><strong>Mal:</strong> Bad/Ill (e.g., Malevolent - evil, Malicious - spiteful, Malady - illness).</p>
+                    <p><strong>Pathy:</strong> Feeling (e.g., Apathy - lack of feeling, Sympathy - shared feeling, Antipathy - dislike).</p>
+                </section>
+            `,
+            formula: "Analyze word prefixes/suffixes to guess meanings: <strong>'eu-' means good, 'dis-' or 'un-' means negation, '-less' means without</strong>.",
+            quiz: [
+                {
+                    q: "What is the synonym of <b>ABATE</b>?",
+                    options: ["Increase", "Reduce", "Postpone", "Exaggerate"],
+                    ans: 1,
+                    exp: "'Abate' means to become less intense or widespread, so 'Reduce' is its synonym."
+                },
+                {
+                    q: "What is the antonym of <b>EPHEMERAL</b>?",
+                    options: ["Temporary", "Short-lived", "Eternal", "Weak"],
+                    ans: 2,
+                    exp: "'Ephemeral' means lasting for a very short time. The opposite is 'Eternal' (lasting forever)."
+                },
+                {
+                    q: "What is the synonym of <b>FRUGAL</b>?",
+                    options: ["Wasteful", "Generous", "Economical", "Rich"],
+                    ans: 2,
+                    exp: "'Frugal' means careful in spending money or resources. The synonym is 'Economical' or 'Thrifty'."
+                }
+            ]
+        },
+        "idioms-phrases": {
+            title: "Idioms and Phrases",
+            notes: `
+                <section>
+                    <p>An <strong>Idiom</strong> is an expression whose meaning is different from the literal meanings of the individual words. Frequently asked idioms in SSC exams have cultural or historical origins.</p>
+                </section>
+                <section>
+                    <h3>Top SSC Idioms</h3>
+                    <p><strong>1. Bite the bullet:</strong> Face a difficult situation with courage.</p>
+                    <p><strong>2. Burn the midnight oil:</strong> Study or work late into the night.</p>
+                    <p><strong>3. Beat around the bush:</strong> Avoid speaking directly about the main topic.</p>
+                    <p><strong>4. Under the weather:</strong> Feeling slightly sick or unwell.</p>
+                    <p><strong>5. Cold shoulder:</strong> To ignore or behave in an unfriendly way towards someone.</p>
+                </section>
+            `,
+            formula: "Don't pick literal meanings! <strong>Idioms are figurative</strong>. (e.g., 'Piece of cake' has nothing to do with food; it means very easy).",
+            quiz: [
+                {
+                    q: "What is the meaning of the idiom: <b>'To face the music'</b>?",
+                    options: [
+                        "To enjoy a musical concert",
+                        "To accept unpleasant consequences of one's actions",
+                        "To express a desire to learn singing",
+                        "To ignore warnings from seniors"
+                    ],
+                    ans: 1,
+                    exp: "'To face the music' means to receive punishment or criticism for something you have done wrong."
+                },
+                {
+                    q: "What does the idiom <b>'A bolt from the blue'</b> mean?",
+                    options: [
+                        "A lightning strike on a clear day",
+                        "A sudden and unexpected event or surprise",
+                        "Winning a large lottery",
+                        "A well-planned trip"
+                    ],
+                    ans: 1,
+                    exp: "'A bolt from the blue' represents something completely unexpected and sudden."
+                },
+                {
+                    q: "What is the meaning of <b>'To kick the bucket'</b>?",
+                    options: ["To start a fight", "To die", "To buy household cleaning tools", "To win a race"],
+                    ans: 1,
+                    exp: "'To kick the bucket' is a euphemism or informal idiom meaning 'to die'."
+                }
+            ]
+        },
+        "one-word": {
+            title: "One Word Substitution",
+            notes: `
+                <section>
+                    <p><strong>One Word Substitution</strong> tests your lexical command by replacing a detailed clause or description with a single accurate word.</p>
+                </section>
+                <section>
+                    <h3>Key Classifications</h3>
+                    <p><strong>Types of Fears (Phobias):</strong> Acrophobia (fear of heights), Claustrophobia (fear of closed spaces), Hydrophobia (fear of water).</p>
+                    <p><strong>Types of Governance:</strong> Democracy (by people), Monarchy (by king/queen), Oligarchy (by few), Autocracy (by one absolute ruler).</p>
+                    <p><strong>Professions & Lifestyles:</strong> Altruist (one who helps others), Optimist (sees positive side), Pessimist (sees negative side).</p>
+                </section>
+            `,
+            formula: "Group substitutions by roots: <strong>'-phobia' (fear), '-cide' (killing, e.g., homicide, suicide), '-cracy' (rule)</strong>.",
+            quiz: [
+                {
+                    q: "A person who writes dictionaries is called a:",
+                    options: ["Lexicographer", "Cartographer", "Calligrapher", "Bibliophile"],
+                    ans: 0,
+                    exp: "'Lexicographer' is a writer of dictionaries. (Cartographer: map maker; Calligrapher: artistic handwriting; Bibliophile: book lover)."
+                },
+                {
+                    q: "A cure for all diseases or problems:",
+                    options: ["Panacea", "Antidote", "Antibiotic", "Placebo"],
+                    ans: 0,
+                    exp: "'Panacea' is a universal remedy or cure-all."
+                },
+                {
+                    q: "The killing of a king is known as:",
+                    options: ["Regicide", "Patricide", "Fratricide", "Homicide"],
+                    ans: 0,
+                    exp: "'-cide' means killing. 'Regi' relates to king/monarch, so 'Regicide' is king-killing. (Patricide: father-killing; Fratricide: brother-killing)."
+                }
+            ]
+        },
+        "error-spotting": {
+            title: "Error Spotting",
+            notes: `
+                <section>
+                    <p><strong>Error Spotting / Sentence Correction</strong> forms a significant portion of questions. It tests your overall grip on English rules, grammar, syntax, and phrasing.</p>
+                </section>
+                <section>
+                    <h3>Top Checkpoints for Spotting Errors</h3>
+                    <p><strong>1. Double Negatives:</strong> Words like 'hardly', 'scarcely', 'unless', 'until' are negative. Do not use 'not' with them. (e.g., 'He could hardly speak' is correct, not 'He could not hardly speak').</p>
+                    <p><strong>2. Adjective Order & Comparatives:</strong> Never use double comparatives (e.g., 'more prettier' is wrong; write 'prettier').</p>
+                    <p><strong>3. Infinitive vs Gerund:</strong> e.g., 'Look forward to' is followed by a gerund (V+ing). (e.g., 'I look forward to meeting you', not 'to meet you').</p>
+                </section>
+            `,
+            formula: "Check parts of sentence sequentially: <strong>Subject -> Verb tense -> Pronoun reference -> Preposition -> Adjective degrees</strong>.",
+            quiz: [
+                {
+                    q: "Spot the error: 'No sooner had he arrived (A) / than it started (B) / raining heavily (C) / No error (D)'",
+                    options: ["A", "B", "C", "D"],
+                    ans: 3,
+                    exp: "The sentence is grammatically correct. 'No sooner' is correctly paired with 'than'."
+                },
+                {
+                    q: "Spot the error: 'One must do (A) / his duty (B) / towards the country (C) / No error (D)'",
+                    options: ["A", "B", "C", "D"],
+                    ans: 1,
+                    exp: "The pronoun for 'One' is 'one's'. So, 'his duty' should be replaced with 'one's duty' in section B."
+                },
+                {
+                    q: "Spot the error: 'Scarcely had I entered the room (A) / than the light (B) / went off (C) / No error (D)'",
+                    options: ["A", "B", "C", "D"],
+                    ans: 1,
+                    exp: "'Scarcely' and 'Hardly' must be followed by 'when' or 'before', not 'than'. Replace 'than' with 'when' in section B."
+                }
+            ]
+        },
+        "comprehension": {
+            title: "Reading Comprehension",
+            notes: `
+                <section>
+                    <p><strong>Reading Comprehension (RC)</strong> assesses your capability to understand written passages, locate details, draw inferences, and deduce the meanings of difficult words from the context.</p>
+                </section>
+                <section>
+                    <h3>Effective Strategies</h3>
+                    <p><strong>Scan the Questions First:</strong> Read questions briefly before reading the passage. This gives you direction on what key points to search for.</p>
+                    <p><strong>Elimination:</strong> Rule out options that are too extreme (using words like 'always', 'never', 'only') or go beyond the scope of the passage.</p>
+                    <p><strong>Identify Contextual Meanings:</strong> If asked about a word's meaning, read the surrounding sentences to deduce its usage.</p>
+                </section>
+            `,
+            formula: "Do not bring in outside knowledge. <strong>Rely strictly on the information provided in the passage</strong> to answer questions.",
+            quiz: [
+                {
+                    q: "If a passage argues that technology has isolated people, the author's attitude is likely:",
+                    options: ["Sarcastic", "Concerned/Critical", "Indifferent", "Optimistic"],
+                    ans: 1,
+                    exp: "Discussing isolation caused by technology shows a concerned or critical stance."
+                },
+                {
+                    q: "Which word is an antonym for 'Ameliorate' (to make better) in a passage discussing solutions?",
+                    options: ["Worsen", "Improve", "Satisfy", "Construct"],
+                    ans: 0,
+                    exp: "'Ameliorate' means to improve or make better. The antonym is 'Worsen'."
+                },
+                {
+                    q: "What is the best way to determine the 'Theme' of a passage?",
+                    options: [
+                        "Focus on the last sentence of the passage only",
+                        "Identify the central idea repeated and developed across all paragraphs",
+                        "Look for the most complex scientific terms used",
+                        "Find the character who speaks the most"
+                    ],
+                    ans: 1,
+                    exp: "The theme represents the core message or central idea explored and expanded throughout the entire passage."
+                }
+            ]
+        }
+    };
+
+    // Load URL topic or default
+    let activeTopic = "parts-of-speech";
+
+    function init() {
+        const urlParams = new URLSearchParams(window.location.search);
+        const topicParam = urlParams.get('topic');
+        if (topicParam && topicsData[topicParam]) {
+            activeTopic = topicParam;
+        }
+        renderTopicList();
+        loadTopic(activeTopic);
+        updateProgress();
+    }
+
+    function renderTopicList() {
+        const list = document.getElementById("topic-list");
+        list.innerHTML = "";
+        
+        Object.keys(topicsData).forEach(key => {
+            const topic = topicsData[key];
+            const isCompleted = localStorage.getItem(`english_${key}`) === 'completed';
+            
+            const li = document.createElement("li");
+            li.className = `topic-item ${key === activeTopic ? 'active' : ''} ${isCompleted ? 'completed' : ''}`;
+            li.id = `item-${key}`;
+            li.setAttribute("onclick", `selectTopic('${key}')`);
+            
+            li.innerHTML = `
+                <span>${topic.title}</span>
+                <span class="chk-complete"></span>
+            `;
+            list.appendChild(li);
+        });
+    }
+
+    function selectTopic(key) {
+        activeTopic = key;
+        
+        // Update active class in sidebar
+        document.querySelectorAll(".topic-item").forEach(item => {
+            item.classList.remove("active");
+        });
+        document.getElementById(`item-${key}`).classList.add("active");
+        
+        // Push state to URL without reloading
+        const newUrl = window.location.protocol + "//" + window.location.host + window.location.pathname + '?topic=' + key;
+        window.history.pushState({path: newUrl}, '', newUrl);
+
+        loadTopic(key);
+    }
+
+    function loadTopic(key) {
+        const topic = topicsData[key];
+        document.getElementById("topic-title").innerText = topic.title;
+        
+        // Populate Notes & Formula Box
+        document.getElementById("topic-notes").innerHTML = `
+            ${topic.notes}
+            <div class="formula-box">
+                <strong>Tips & Key Concept:</strong> ${topic.formula}
+            </div>
+        `;
+
+        // Update Complete Button
+        const isCompleted = localStorage.getItem(`english_${key}`) === 'completed';
+        const btn = document.getElementById("complete-btn");
+        const btnText = document.getElementById("btn-text");
+        if (isCompleted) {
+            btn.classList.add("completed");
+            btnText.innerText = "Completed";
+        } else {
+            btn.classList.remove("completed");
+            btnText.innerText = "Mark as Completed";
+        }
+
+        // Load Quiz
+        const quizContainer = document.getElementById("quiz-container");
+        quizContainer.innerHTML = "";
+        
+        topic.quiz.forEach((qObj, index) => {
+            const card = document.createElement("div");
+            card.className = "quiz-card";
+            
+            let optionsHTML = "";
+            qObj.options.forEach((opt, optIndex) => {
+                optionsHTML += `
+                    <li class="quiz-option" onclick="checkAnswer(this, ${index}, ${optIndex}, ${qObj.ans})">${opt}</li>
+                `;
+            });
+
+            card.innerHTML = `
+                <div class="quiz-question">Q${index + 1}: ${qObj.q}</div>
+                <ul class="quiz-options">
+                    ${optionsHTML}
+                </ul>
+                <button class="reveal-btn" onclick="toggleExplanation(${index})">Show Answer & Explanation</button>
+                <div class="explanation" id="exp-${index}">${qObj.exp}</div>
+            `;
+            quizContainer.appendChild(card);
+        });
+    }
+
+    function checkAnswer(element, questionIndex, selectedIndex, correctIndex) {
+        const parent = element.parentElement;
+        const options = parent.querySelectorAll(".quiz-option");
+        
+        // Disable multiple clicks
+        options.forEach(opt => {
+            opt.style.pointerEvents = "none";
+        });
+
+        if (selectedIndex === correctIndex) {
+            element.classList.add("correct");
+        } else {
+            element.classList.add("wrong");
+            options[correctIndex].classList.add("correct");
+        }
+        
+        toggleExplanation(questionIndex, true);
+    }
+
+    function toggleExplanation(index, forceShow = false) {
+        const expDiv = document.getElementById(`exp-${index}`);
+        if (forceShow || expDiv.style.display === "none" || !expDiv.style.display) {
+            expDiv.style.display = "block";
+        } else {
+            expDiv.style.display = "none";
+        }
+    }
+
+    function toggleTopicComplete() {
+        const key = activeTopic;
+        const isCompleted = localStorage.getItem(`english_${key}`) === 'completed';
+        const sidebarItem = document.getElementById(`item-${key}`);
+        const btn = document.getElementById("complete-btn");
+        const btnText = document.getElementById("btn-text");
+
+        if (isCompleted) {
+            localStorage.removeItem(`english_${key}`);
+            sidebarItem.classList.remove("completed");
+            btn.classList.remove("completed");
+            btnText.innerText = "Mark as Completed";
+        } else {
+            localStorage.setItem(`english_${key}`, 'completed');
+            sidebarItem.classList.add("completed");
+            btn.classList.add("completed");
+            btnText.innerText = "Completed";
+        }
+        
+        updateProgress();
+    }
+
+    function updateProgress() {
+        const total = Object.keys(topicsData).length;
+        let completed = 0;
+        
+        Object.keys(topicsData).forEach(key => {
+            if (localStorage.getItem(`english_${key}`) === 'completed') {
+                completed++;
+            }
+        });
+
+        const percent = Math.round((completed / total) * 100);
+        document.getElementById("progress-bar").style.width = percent + "%";
+        document.getElementById("progress-text").innerText = percent + "%";
+    }
+
+    function filterTopics() {
+        const input = document.getElementById("search-input").value.toLowerCase();
+        const items = document.querySelectorAll(".topic-item");
+        
+        items.forEach(item => {
+            const text = item.innerText.toLowerCase();
+            if (text.includes(input)) {
+                item.style.display = "flex";
+            } else {
+                item.style.display = "none";
+            }
+        });
+    }
+
+    window.onload = init;
+</script>
+</body>
+</html>

@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Current Affairs Dashboard - GovtExamHub</title>
+    <meta name="description" content="Prepare Current Affairs for SSC CGL. Monthly national & international news, sports updates, awards, government schemes, summaries and quizzes.">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header>
+    <h1>GovtExamHub</h1>
+    <p>Current Affairs Preparation Dashboard</p>
+    <nav>
+        <a href="index.html">Home</a>
+        <a href="ssc.html">Exams</a>
+        <a href="quantitative.html">Subjects</a>
+        <a href="current_affairs.html" class="active">Current Affairs</a>
+    </nav>
+</header>
+
+<main>
+    <div class="dashboard-container">
+        <!-- Sidebar -->
+        <div class="sidebar">
+            <div class="search-box">
+                <input type="text" id="search-input" placeholder="Search months..." onkeyup="filterTopics()">
+            </div>
+            
+            <div class="progress-container">
+                <div class="progress-header">
+                    <span>Course Progress</span>
+                    <span id="progress-text">0%</span>
+                </div>
+                <div class="progress-bar-bg">
+                    <div class="progress-bar-fill" id="progress-bar"></div>
+                </div>
+            </div>
+
+            <div class="topic-list-container">
+                <ul class="topic-list" id="topic-list">
+                    <!-- Topics will be dynamically populated -->
+                </ul>
+            </div>
+        </div>
+
+        <!-- Content Panel -->
+        <div class="content-panel">
+            <div class="content-header">
+                <h2 id="topic-title">Select a Month</h2>
+                <button class="mark-complete-btn" id="complete-btn" onclick="toggleTopicComplete()">
+                    <span class="chk-complete-icon"></span>
+                    <span id="btn-text">Mark as Completed</span>
+                </button>
+            </div>
+
+            <div class="study-notes" id="topic-notes">
+                <!-- Notes will be dynamically populated -->
+            </div>
+
+            <div class="quiz-section">
+                <h3>Current Affairs Practice Quiz</h3>
+                <div id="quiz-container">
+                    <!-- Quiz questions will be dynamically populated -->
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+
+<footer>
+    <p>© 2026 GovtExamHub. All Rights Reserved.</p>
+</footer>
+
+<script>
+    const topicsData = {
+        "june-2026": {
+            title: "June 2026 Current Affairs",
+            notes: `
+                <section>
+                    <p><strong>June 2026</strong> marks key global alignments, space updates, and high-impact sports tournaments.</p>
+                </section>
+                <section>
+                    <h3>National & International News</h3>
+                    <p><strong>1. Gaganyaan-3:</strong> ISRO successfully completed the second unmanned abort test flight (TV-D2) for India’s crewed space program, paving the way for human flight.</p>
+                    <p><strong>2. G7 Summit:</strong> The 52nd G7 summit concluded in Rome, Italy. The discussions heavily targeted artificial intelligence safety regulations and green energies.</p>
+                    <p><strong>3. Booker Prize:</strong> The International Booker Prize for translation was awarded to a prominent Indian translation of a partition-era novel, boosting South Asian literature visibility.</p>
+                </section>
+            `,
+            formula: "Focus on <strong>G7 Summit location (Rome, Italy)</strong>, <strong>Gaganyaan milestones</strong>, and international book awards.",
+            quiz: [
+                {
+                    q: "Which city hosted the annual G7 Summit in June 2026?",
+                    options: ["Rome, Italy", "Tokyo, Japan", "London, UK", "Washington D.C., USA"],
+                    ans: 0,
+                    exp: "The 52nd G7 Summit was held in Rome, Italy, focusing on international security, economic stability, and AI ethics."
+                },
+                {
+                    q: "Which organization conducted the precursor Gaganyaan-3 flight test?",
+                    options: ["ISRO", "NASA", "ESA", "Roscosmos"],
+                    ans: 0,
+                    exp: "ISRO (Indian Space Research Organisation) conducted the successful precursor Gaganyaan test flight."
+                },
+                {
+                    q: "The International Booker Prize is awarded for which category of literary work?",
+                    options: [
+                        "Fiction translated into English and published in the UK/Ireland",
+                        "English literature written by citizens of the Commonwealth",
+                        "Poetry written in native languages only",
+                        "Non-fiction historical biographies"
+                    ],
+                    ans: 0,
+                    exp: "The International Booker Prize is awarded annually for a single book that is translated into English and published in the UK or Ireland."
+                }
+            ]
+        },
+        "may-2026": {
+            title: "May 2026 Current Affairs",
+            notes: `
+                <section>
+                    <p><strong>May 2026</strong> brings records in fiscal surpluses, blue economy investments, and athletics triumphs.</p>
+                </section>
+                <section>
+                    <h3>Key Developments</h3>
+                    <p><strong>1. RBI Record Dividend:</strong> The Reserve Bank of India approved a record surplus transfer of ₹2,10,874 Crore (approx. 2.11 Lakh Crore) to the Central Government for FY26.</p>
+                    <p><strong>2. PM Matsya Sampada Yojana (PMMSY):</strong> The Ministry of Fisheries, Animal Husbandry & Dairying introduced a ₹6,000 crore sub-scheme focusing on formalizing the aquaculture sector.</p>
+                    <p><strong>3. Sports:</strong> India ended their Asian Athletics Championship campaign with five gold medals, putting up a stellar performance in high-jump and relay.</p>
+                </section>
+            `,
+            formula: "Remember the exact RBI surplus transfer amount: <strong>₹2.11 Lakh Crore</strong>. Link PMMSY with the **Blue Economy (Aquaculture/Fisheries)**.",
+            quiz: [
+                {
+                    q: "What was the record surplus amount transferred by RBI to the Indian Government in May 2026?",
+                    options: ["₹2,10,874 Crore", "₹1,50,000 Crore", "₹87,420 Crore", "₹3,00,000 Crore"],
+                    ans: 0,
+                    exp: "The RBI Board approved a record surplus transfer of ₹2,10,874 Crore to the central government for the fiscal year."
+                },
+                {
+                    q: "The PM Matsya Sampada Yojana (PMMSY) is primary directed towards which sector?",
+                    options: ["Fisheries & Aquaculture", "Silk cultivation", "Milk production", "Organic cotton farming"],
+                    ans: 0,
+                    exp: "PMMSY is a flagship scheme focused on sustainable development of the fisheries sector and welfare of fishermen."
+                },
+                {
+                    q: "How many gold medals did India win at the Asian Athletics Championship in May 2026?",
+                    options: ["5", "8", "3", "12"],
+                    ans: 0,
+                    exp: "India concluded the championship with a tally of 5 gold medals, displaying strong improvements in track and field."
+                }
+            ]
+        },
+        "april-2026": {
+            title: "April 2026 Current Affairs",
+            notes: `
+                <section>
+                    <p><strong>April 2026</strong> highlights international growth forecast adjustments and crucial military bilateral exercises.</p>
+                </section>
+                <section>
+                    <h3>National & Security Updates</h3>
+                    <p><strong>1. IMF GDP Forecast:</strong> The International Monetary Fund (IMF) raised India's GDP growth projection to 7.2% for the financial year, citing strong domestic demand and investments.</p>
+                    <p><strong>2. Exercise 'Varuna':</strong> The bilateral naval exercise 'Varuna' between the Indian Navy and French Navy took place in the Arabian Sea, enhancing tactical interoperability.</p>
+                    <p><strong>3. Army Appointments:</strong> General Upendra Dwivedi continues to lead strategic reorganizations along the northern borders as the Chief of Army Staff.</p>
+                </section>
+            `,
+            formula: "GDP projections: <strong>IMF = 7.2%</strong>. Naval Exercise <strong>Varuna = India & France</strong>.",
+            quiz: [
+                {
+                    q: "What is India's GDP growth rate projection for FY26 as forecast by the IMF in April 2026?",
+                    options: ["7.2%", "6.8%", "6.5%", "7.5%"],
+                    ans: 0,
+                    exp: "The IMF raised India's GDP growth estimate to 7.2% due to robust public and private investments."
+                },
+                {
+                    q: "Which two countries participate in the bilateral naval exercise 'Varuna'?",
+                    options: ["India and France", "India and USA", "India and Japan", "India and Russia"],
+                    ans: 0,
+                    exp: "Varuna is a bilateral naval exercise conducted annually between the navies of India and France."
+                },
+                {
+                    q: "Who is the Chief of Army Staff of India as of April 2026?",
+                    options: ["General Upendra Dwivedi", "General Manoj Pande", "General Anil Chauhan", "General Manoj Mukund Naravane"],
+                    ans: 0,
+                    exp: "General Upendra Dwivedi assumed charge as the 30th Chief of the Army Staff of the Indian Army."
+                }
+            ]
+        },
+        "march-2026": {
+            title: "March 2026 Current Affairs",
+            notes: `
+                <section>
+                    <p><strong>March 2026</strong> marks green energy milestones and important geopolitial expansions.</p>
+                </section>
+                <section>
+                    <h3>Important News</h3>
+                    <p><strong>1. Khavda Renewable Park:</strong> India inaugurated the initial 5,000 MW phase of the world's largest renewable energy park in Khavda, Gujarat, planned for a total capacity of 30,000 MW.</p>
+                    <p><strong>2. NATO Expansion:</strong> Sweden officially joined NATO as its 32nd member, completing a shift in European security alignment following Finland's entry.</p>
+                    <p><strong>3. Pritzker Architecture Prize:</strong> Japanese architect Riken Yamamoto was named the winner of the prestigious Pritzker Prize, recognized for his community-centric designs.</p>
+                </section>
+            `,
+            formula: "World's largest energy park: <strong>Khavda, Gujarat</strong>. 32nd NATO member: <strong>Sweden</strong>. Pritzker Prize: <strong>Riken Yamamoto</strong>.",
+            quiz: [
+                {
+                    q: "Where is the world's largest renewable energy park located?",
+                    options: ["Khavda, Gujarat", "Thar, Rajasthan", "Jaisalmer, Rajasthan", "Kurnool, Andhra Pradesh"],
+                    ans: 0,
+                    exp: "The Khavda Renewable Energy Park is being built in the Kutch district of Gujarat, with a planned capacity of 30 GW."
+                },
+                {
+                    q: "Which country officially became the 32nd member of NATO in 2024?",
+                    options: ["Sweden", "Finland", "Ukraine", "Switzerland"],
+                    ans: 0,
+                    exp: "Sweden deposited its instrument of accession to become NATO's 32nd member on March 7, 2024."
+                },
+                {
+                    q: "Which architect won the Pritzker Architecture Prize in 2024?",
+                    options: ["Riken Yamamoto", "Sir David Chipperfield", "Balkrishna Doshi", "Francis Kere"],
+                    ans: 0,
+                    exp: "Japanese architect Riken Yamamoto was awarded the 2024 Pritzker Architecture Prize for his democratic and community-focused work."
+                }
+            ]
+        },
+        "february-2026": {
+            title: "February 2026 Current Affairs",
+            notes: `
+                <section>
+                    <p><strong>February 2026</strong> was highlighted by major judicial declarations and budget announcements in India.</p>
+                </section>
+                <section>
+                    <h3>Budget & Judicial Milestones</h3>
+                    <p><strong>1. Electoral Bonds Scheme:</strong> A five-judge Constitution Bench of the Supreme Court of India declared the Electoral Bonds Scheme unconstitutional, stating it violated the Right to Information under Article 19(1)(a).</p>
+                    <p><strong>2. National Museum of Epigraphy:</strong> India’s first digital national museum of epigraphy was established at Salar Jung Museum, Hyderabad, focusing on digitizing ancient inscriptions.</p>
+                    <p><strong>3. Fit India Movement:</strong> Narendra Kumar Yadav, an IRS officer, was appointed as the brand ambassador for the government's flagship Fit India Movement.</p>
+                </section>
+            `,
+            formula: "Electoral bonds ruled void via <strong>Article 19(1)(a)</strong>. Digital Epigraphy Museum: <strong>Hyderabad</strong>.",
+            quiz: [
+                {
+                    q: "The Supreme Court struck down the Electoral Bonds Scheme citing violation of which fundamental right?",
+                    options: [
+                        "Right to Information (Article 19(1)(a))",
+                        "Right to Equality (Article 14)",
+                        "Right to Life (Article 21)",
+                        "Right to Freedom of Religion (Article 25)"
+                    ],
+                    ans: 0,
+                    exp: "The Supreme Court ruled that anonymous political donations violated the voters' right to information regarding funding of political parties."
+                },
+                {
+                    q: "Where was India's first digital national museum of epigraphy established?",
+                    options: ["Hyderabad", "New Delhi", "Kolkata", "Chennai"],
+                    ans: 0,
+                    exp: "The museum was established at the Salar Jung Museum in Hyderabad to store digital images and metadata of over 1 lakh inscriptions."
+                },
+                {
+                    q: "Who was appointed as the brand ambassador for the Fit India Movement in early 2024?",
+                    options: ["Narendra Kumar Yadav", "Neeraj Chopra", "MS Dhoni", "Mary Kom"],
+                    ans: 0,
+                    exp: "IRS Officer Narendra Kumar Yadav became the brand ambassador, encouraging fitness and health initiatives nationwide."
+                }
+            ]
+        },
+        "january-2026": {
+            title: "January 2026 Current Affairs",
+            notes: `
+                <section>
+                    <p><strong>January 2026</strong> stands as a landmark month for scientific endeavors, constitutional celebrations, and cultural events.</p>
+                </section>
+                <section>
+                    <h3>Key Milestones</h3>
+                    <p><strong>1. XPOSAT Launch:</strong> ISRO successfully launched the X-ray Polarimeter Satellite (XPoSat) into a low earth orbit to study polarization of cosmic X-rays from black holes, neutron stars, and active galactic nuclei.</p>
+                    <p><strong>2. Republic Day Chief Guest:</strong> French President Emmanuel Macron visited India as the Chief Guest for the 75th Republic Day celebrations, marking strong strategic cooperation.</p>
+                    <p><strong>3. Ram Mandir Consecration:</strong> The 'Pran Pratishtha' (consecration ceremony) of the idol of Ram Lalla was performed at the newly built Ram Mandir in Ayodhya on January 22, 2024.</p>
+                </section>
+            `,
+            formula: "XPoSat = <strong>X-ray study (black holes)</strong>. 75th Republic Day Guest = <strong>Emmanuel Macron (France)</strong>. Consecration = <strong>January 22, 2024</strong>.",
+            quiz: [
+                {
+                    q: "What is the primary scientific objective of ISRO's XPoSat mission launched in January 2024?",
+                    options: [
+                        "To study polarization of cosmic X-rays",
+                        "To map water ice on the Moon's South Pole",
+                        "To monitor tropical weather and hurricanes",
+                        "To study solar flares and magnetic storms"
+                    ],
+                    ans: 0,
+                    exp: "XPoSat is India's first dedicated polarimetry mission to study the dynamics of bright astronomical X-ray sources in extreme conditions."
+                },
+                {
+                    q: "Who was the Chief Guest for India's historic 75th Republic Day parade in 2024?",
+                    options: ["Emmanuel Macron", "Joe Biden", "Rishi Sunak", "Giorgia Meloni"],
+                    ans: 0,
+                    exp: "French President Emmanuel Macron was the Chief Guest, strengthening bilateral strategic partnership."
+                },
+                {
+                    q: "On which date was the Ram Mandir consecration ceremony held in Ayodhya?",
+                    options: ["January 22, 2024", "January 26, 2024", "January 15, 2024", "January 30, 2024"],
+                    ans: 0,
+                    exp: "The Pran Pratishtha ceremony of Ram Lalla at the Ayodhya temple was held on January 22, 2024."
+                }
+            ]
+        }
+    };
+
+    // Load URL topic or default
+    let activeTopic = "june-2026";
+
+    function init() {
+        const urlParams = new URLSearchParams(window.location.search);
+        const topicParam = urlParams.get('topic');
+        if (topicParam && topicsData[topicParam]) {
+            activeTopic = topicParam;
+        }
+        renderTopicList();
+        loadTopic(activeTopic);
+        updateProgress();
+    }
+
+    function renderTopicList() {
+        const list = document.getElementById("topic-list");
+        list.innerHTML = "";
+        
+        Object.keys(topicsData).forEach(key => {
+            const topic = topicsData[key];
+            const isCompleted = localStorage.getItem(`current_${key}`) === 'completed';
+            
+            const li = document.createElement("li");
+            li.className = `topic-item ${key === activeTopic ? 'active' : ''} ${isCompleted ? 'completed' : ''}`;
+            li.id = `item-${key}`;
+            li.setAttribute("onclick", `selectTopic('${key}')`);
+            
+            li.innerHTML = `
+                <span>${topic.title}</span>
+                <span class="chk-complete"></span>
+            `;
+            list.appendChild(li);
+        });
+    }
+
+    function selectTopic(key) {
+        activeTopic = key;
+        
+        // Update active class in sidebar
+        document.querySelectorAll(".topic-item").forEach(item => {
+            item.classList.remove("active");
+        });
+        document.getElementById(`item-${key}`).classList.add("active");
+        
+        // Push state to URL without reloading
+        const newUrl = window.location.protocol + "//" + window.location.host + window.location.pathname + '?topic=' + key;
+        window.history.pushState({path: newUrl}, '', newUrl);
+
+        loadTopic(key);
+    }
+
+    function loadTopic(key) {
+        const topic = topicsData[key];
+        document.getElementById("topic-title").innerText = topic.title;
+        
+        // Populate Notes & Formula Box
+        document.getElementById("topic-notes").innerHTML = `
+            ${topic.notes}
+            <div class="formula-box">
+                <strong>Tips & Key Concept:</strong> ${topic.formula}
+            </div>
+        `;
+
+        // Update Complete Button
+        const isCompleted = localStorage.getItem(`current_${key}`) === 'completed';
+        const btn = document.getElementById("complete-btn");
+        const btnText = document.getElementById("btn-text");
+        if (isCompleted) {
+            btn.classList.add("completed");
+            btnText.innerText = "Completed";
+        } else {
+            btn.classList.remove("completed");
+            btnText.innerText = "Mark as Completed";
+        }
+
+        // Load Quiz
+        const quizContainer = document.getElementById("quiz-container");
+        quizContainer.innerHTML = "";
+        
+        topic.quiz.forEach((qObj, index) => {
+            const card = document.createElement("div");
+            card.className = "quiz-card";
+            
+            let optionsHTML = "";
+            qObj.options.forEach((opt, optIndex) => {
+                optionsHTML += `
+                    <li class="quiz-option" onclick="checkAnswer(this, ${index}, ${optIndex}, ${qObj.ans})">${opt}</li>
+                `;
+            });
+
+            card.innerHTML = `
+                <div class="quiz-question">Q${index + 1}: ${qObj.q}</div>
+                <ul class="quiz-options">
+                    ${optionsHTML}
+                </ul>
+                <button class="reveal-btn" onclick="toggleExplanation(${index})">Show Answer & Explanation</button>
+                <div class="explanation" id="exp-${index}">${qObj.exp}</div>
+            `;
+            quizContainer.appendChild(card);
+        });
+    }
+
+    function checkAnswer(element, questionIndex, selectedIndex, correctIndex) {
+        const parent = element.parentElement;
+        const options = parent.querySelectorAll(".quiz-option");
+        
+        // Disable multiple clicks
+        options.forEach(opt => {
+            opt.style.pointerEvents = "none";
+        });
+
+        if (selectedIndex === correctIndex) {
+            element.classList.add("correct");
+        } else {
+            element.classList.add("wrong");
+            options[correctIndex].classList.add("correct");
+        }
+        
+        toggleExplanation(questionIndex, true);
+    }
+
+    function toggleExplanation(index, forceShow = false) {
+        const expDiv = document.getElementById(`exp-${index}`);
+        if (forceShow || expDiv.style.display === "none" || !expDiv.style.display) {
+            expDiv.style.display = "block";
+        } else {
+            expDiv.style.display = "none";
+        }
+    }
+
+    function toggleTopicComplete() {
+        const key = activeTopic;
+        const isCompleted = localStorage.getItem(`current_${key}`) === 'completed';
+        const sidebarItem = document.getElementById(`item-${key}`);
+        const btn = document.getElementById("complete-btn");
+        const btnText = document.getElementById("btn-text");
+
+        if (isCompleted) {
+            localStorage.removeItem(`current_${key}`);
+            sidebarItem.classList.remove("completed");
+            btn.classList.remove("completed");
+            btnText.innerText = "Mark as Completed";
+        } else {
+            localStorage.setItem(`current_${key}`, 'completed');
+            sidebarItem.classList.add("completed");
+            btn.classList.add("completed");
+            btnText.innerText = "Completed";
+        }
+        
+        updateProgress();
+    }
+
+    function updateProgress() {
+        const total = Object.keys(topicsData).length;
+        let completed = 0;
+        
+        Object.keys(topicsData).forEach(key => {
+            if (localStorage.getItem(`current_${key}`) === 'completed') {
+                completed++;
+            }
+        });
+
+        const percent = Math.round((completed / total) * 100);
+        document.getElementById("progress-bar").style.width = percent + "%";
+        document.getElementById("progress-text").innerText = percent + "%";
+    }
+
+    function filterTopics() {
+        const input = document.getElementById("search-input").value.toLowerCase();
+        const items = document.querySelectorAll(".topic-item");
+        
+        items.forEach(item => {
+            const text = item.innerText.toLowerCase();
+            if (text.includes(input)) {
+                item.style.display = "flex";
+            } else {
+                item.style.display = "none";
+            }
+        });
+    }
+
+    window.onload = init;
+</script>
+</body>
+</html>
