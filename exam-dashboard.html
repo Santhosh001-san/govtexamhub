@@ -1,0 +1,1522 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Practice & Test Dashboard - GovtExamHub</title>
+    <meta name="description" content="Study detailed topics, revise key concepts, and take practice test quizzes for various competitive exams on GovtExamHub.">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header>
+    <h1>GovtExamHub</h1>
+    <p id="dashboard-subtitle">Exam Study & Practice Dashboard</p>
+    <nav>
+        <a href="index.html">Home</a>
+        <a href="ssc.html" id="nav-exam">Exams</a>
+        <a href="quantitative.html">Subjects</a>
+        <a href="current_affairs.html">Current Affairs</a>
+    </nav>
+</header>
+
+<main>
+    <div class="dashboard-container">
+        <!-- Sidebar -->
+        <div class="sidebar">
+            <div class="search-box">
+                <input type="text" id="search-input" placeholder="Search topics..." onkeyup="filterTopics()">
+            </div>
+            
+            <div class="progress-container">
+                <div class="progress-header">
+                    <span>Subject Progress</span>
+                    <span id="progress-text">0%</span>
+                </div>
+                <div class="progress-bar-bg">
+                    <div class="progress-bar-fill" id="progress-bar"></div>
+                </div>
+            </div>
+
+            <div class="topic-list-container">
+                <ul class="topic-list" id="topic-list">
+                    <!-- Topics will be dynamically populated -->
+                </ul>
+            </div>
+        </div>
+
+        <!-- Content Panel -->
+        <div class="content-panel">
+            <div class="content-header">
+                <h2 id="topic-title">Select a Topic</h2>
+                <button class="mark-complete-btn" id="complete-btn" onclick="toggleTopicComplete()">
+                    <span class="chk-complete-icon"></span>
+                    <span id="btn-text">Mark as Completed</span>
+                </button>
+            </div>
+
+            <div class="study-notes" id="topic-notes">
+                <!-- Notes will be dynamically populated -->
+            </div>
+
+            <div class="quiz-section">
+                <h3>Practice Questions</h3>
+                <div id="quiz-container">
+                    <!-- Quiz questions will be dynamically populated -->
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+
+<footer>
+    <p>© 2026 GovtExamHub. All Rights Reserved.</p>
+</footer>
+
+<script>
+    const examData = {
+        "banking": {
+            title: "Banking Exams Dashboard",
+            subjects: {
+                "quant": {
+                    title: "Quantitative Aptitude",
+                    topics: {
+                        "di": {
+                            title: "Data Interpretation",
+                            notes: `
+                                <section>
+                                    <p><strong>Data Interpretation (DI)</strong> forms the core of Quantitative Aptitude in banking exams, accounting for 10-15 marks in Prelims and even more in Mains.</p>
+                                </section>
+                                <section>
+                                    <h3>Common Formats</h3>
+                                    <p><strong>1. Bar Graphs:</strong> Displaying values with vertical/horizontal bars. Compare heights to read values.</p>
+                                    <p><strong>2. Line Graphs:</strong> Shows trends over time. Check slopes of lines.</p>
+                                    <p><strong>3. Pie Charts:</strong> Represents proportions out of 100% or 360 degrees. Remember: 1% = 3.6 degrees.</p>
+                                    <p><strong>4. Tabular DI:</strong> Raw data in grids. Requires clean column tracking and speed-addition.</p>
+                                </section>
+                            `,
+                            formula: "Use approximation. Master calculations like percentage changes and average ratios to solve within 35 seconds per question.",
+                            quiz: [
+                                {
+                                    q: "In a pie chart, a sector represents 25% of the total values. What is its angle in degrees?",
+                                    options: ["90°", "100°", "80°", "75°"],
+                                    ans: 0,
+                                    exp: "Calculation: 25% of 360° = (25/100) * 360 = 90°."
+                                },
+                                {
+                                    q: "The production of a company increased from 80 tonnes in 2024 to 120 tonnes in 2025. Find the percentage increase.",
+                                    options: ["50%", "40%", "33.33%", "25%"],
+                                    ans: 0,
+                                    exp: "Increase = 120 - 80 = 40. Percentage increase = (40 / 80) * 100 = 50%."
+                                },
+                                {
+                                    q: "If the ratio of imports to exports of a country in a year is 4:5, and the exports were $150 million, what were the imports?",
+                                    options: ["$120 million", "$100 million", "$125 million", "$130 million"],
+                                    ans: 0,
+                                    exp: "Ratio = 4/5. 5 parts = $150m, so 1 part = $30m. Hence, 4 parts (imports) = 4 * 30 = $120 million."
+                                }
+                            ]
+                        },
+                        "simplification": {
+                            title: "Simplification & Approximation",
+                            notes: `
+                                <section>
+                                    <p><strong>Simplification</strong> tests basic calculation speed, while <strong>Approximation</strong> requires rounding decimals to nearest integers for fast estimation.</p>
+                                </section>
+                                <section>
+                                    <h3>Order of Operations</h3>
+                                    <p>Strictly follow the <strong>VBODMAS</strong> rule:</p>
+                                    <p><strong>V:</strong> Vinculum (Bar bracket)</p>
+                                    <p><strong>B:</strong> Brackets (), {}, []</p>
+                                    <p><strong>O:</strong> Of (Power / Multiplicative Priority)</p>
+                                    <p><strong>D:</strong> Division</p>
+                                    <p><strong>M:</strong> Multiplication</p>
+                                    <p><strong>A:</strong> Addition</p>
+                                    <p><strong>S:</strong> Subtraction</p>
+                                </section>
+                            `,
+                            formula: "Memorize squares up to 30, cubes up to 15, and fractional values of percentages (e.g. 16.66% = 1/6, 37.5% = 3/8).",
+                            quiz: [
+                                {
+                                    q: "Solve: 45% of 400 + 360 ÷ 9 = ?",
+                                    options: ["220", "200", "240", "180"],
+                                    ans: 0,
+                                    exp: "45% of 400 = 180. 360 / 9 = 40. 180 + 40 = 220."
+                                },
+                                {
+                                    q: "Approximate: 12.01² + 7.99³ - 15.02 = ?",
+                                    options: ["641", "656", "620", "700"],
+                                    ans: 0,
+                                    exp: "Round to integers: 12² + 8³ - 15 = 144 + 512 - 15 = 656 - 15 = 641."
+                                },
+                                {
+                                    q: "Solve: (12.5% of 80) + (33.33% of 90) = ?",
+                                    options: ["40", "30", "50", "45"],
+                                    ans: 0,
+                                    exp: "12.5% is 1/8. (1/8)*80 = 10. 33.33% is 1/3. (1/3)*90 = 30. 10 + 30 = 40."
+                                }
+                            ]
+                        },
+                        "series": {
+                            title: "Number Series",
+                            notes: `
+                                <section>
+                                    <p><strong>Number Series</strong> contains a sequence of numbers following a logical pattern. You need to identify the pattern and find either the missing number or the wrong number in the sequence.</p>
+                                </section>
+                            `,
+                            formula: "Calculate differences between adjacent terms. Common patterns are: arithmetic difference, geometric ratios, prime differences, or squared/cubed shifts.",
+                            quiz: [
+                                {
+                                    q: "Find the missing term: 4, 9, 19, 39, 79, ?",
+                                    options: ["159", "149", "169", "139"],
+                                    ans: 0,
+                                    exp: "Pattern: x2 + 1. 4*2+1=9, 9*2+1=19, 19*2+1=39, 39*2+1=79, 79*2+1=159."
+                                },
+                                {
+                                    q: "Find the missing term: 2, 3, 5, 8, 12, 17, ?",
+                                    options: ["23", "22", "24", "25"],
+                                    ans: 0,
+                                    exp: "Differences are consecutive integers: +1, +2, +3, +4, +5. Next is +6. 17 + 6 = 23."
+                                },
+                                {
+                                    q: "Find the wrong number in the series: 3, 5, 8, 13, 20, 33",
+                                    options: ["20", "8", "13", "33"],
+                                    ans: 0,
+                                    exp: "The series is a Fibonacci-like pattern where each number is the sum of previous two: 3+5=8, 5+8=13, 8+13=21 (not 20), 13+21=34 (not 33). If 20 was 21, the series holds. Hence, 20 is wrong."
+                                }
+                            ]
+                        },
+                        "quadratic": {
+                            title: "Quadratic Equations",
+                            notes: `
+                                <section>
+                                    <p><strong>Quadratic Equations</strong> involve solving two equations, one in 'x' and one in 'y', and comparing their roots.</p>
+                                </section>
+                            `,
+                            formula: "Equation: ax² + bx + c = 0. Use factorization to find roots, then cross-compare all combinations of x and y.",
+                            quiz: [
+                                {
+                                    q: "If x² - 5x + 6 = 0 and y² - 7y + 12 = 0, compare x and y.",
+                                    options: ["x < y", "x > y", "x = y", "Relation cannot be established"],
+                                    ans: 0,
+                                    exp: "x roots are 2 and 3. y roots are 3 and 4. Since both roots of y are greater than or equal to x, we have x <= y, which fits x < y (options-wise, standard choice for x < y / x <= y depending on options. Let's look closer: y is always >= x)."
+                                },
+                                {
+                                    q: "Solve roots for: x² + 5x + 6 = 0",
+                                    options: ["-2, -3", "2, 3", "-2, 3", "2, -3"],
+                                    ans: 0,
+                                    exp: "(x+2)(x+3) = 0. Roots are -2 and -3."
+                                },
+                                {
+                                    q: "If x² = 16 and y = 4, compare x and y.",
+                                    options: ["x <= y", "x >= y", "x = y", "x > y"],
+                                    ans: 0,
+                                    exp: "x = +4 or -4. y = 4. Therefore, x is either equal to or less than y (x <= y)."
+                                }
+                            ]
+                        }
+                    }
+                },
+                "reasoning": {
+                    title: "Reasoning Ability",
+                    topics: {
+                        "puzzles": {
+                            title: "Puzzles & Seating Arrangements",
+                            notes: `
+                                <section>
+                                    <p><strong>Puzzles</strong> and <strong>Seating Arrangements</strong> form the largest section of the Reasoning paper, testing logical placement under constraints.</p>
+                                </section>
+                            `,
+                            formula: "Make multiple case grids/tables. Eliminate cases rapidly as you read negative statements.",
+                            quiz: [
+                                {
+                                    q: "Eight people A-H are sitting in a circle facing the center. A is second to the right of C. B is third to the left of A. Who sits opposite C?",
+                                    options: ["B", "D", "A", "H"],
+                                    ans: 0,
+                                    exp: "Placing C at position 1. A sits at 3. B sits third to the left of A (which is position 8). C is at 1, B is opposite A? No, 8 positions. Opposite 1 is 5, opposite 3 is 7, opposite 8 is 4. B sits third to the left of A (positions 3 - 3 = 0, i.e., position 8). By building the circular grid, B sits opposite C."
+                                },
+                                {
+                                    q: "Five boxes J, K, L, M, N are stacked. L is immediately above J. M is at the very bottom. K is between N and L. Which box is at the top?",
+                                    options: ["N", "J", "L", "K"],
+                                    ans: 0,
+                                    exp: "M is at the bottom (position 1). L is above J. K is between N and L. Stack from top: N, K, L, J, M. Hence N is at the top."
+                                },
+                                {
+                                    q: "If P is sitting immediately left of Q, who faces North, what direction does P face if they sit opposite each other in parallel rows?",
+                                    options: ["South", "North", "East", "West"],
+                                    ans: 0,
+                                    exp: "In parallel rows, the opposite row faces South if one faces North. Thus the person opposite faces South."
+                                }
+                            ]
+                        },
+                        "syllogism": {
+                            title: "Syllogism",
+                            notes: `
+                                <section>
+                                    <p><strong>Syllogism</strong> tests deduction of relations between categories based on statements like 'All A are B', 'Some A are not B', or 'Only a few A are B'.</p>
+                                </section>
+                            `,
+                            formula: "Draw the minimal overlap Venn diagram. Check if the conclusion is true in all possible valid diagrams.",
+                            quiz: [
+                                {
+                                    q: "Statements: All Pens are Books. Some Books are Rulers. Conclusion: Some Pens are Rulers. (True/False)",
+                                    options: ["False", "True", "Either True or False", "Cannot say"],
+                                    ans: 0,
+                                    exp: "There is no direct relationship stated between Pens and Rulers. The minimal overlap diagram shows Pens and Rulers as separate. Hence, the conclusion does not follow."
+                                },
+                                {
+                                    q: "Statements: Only a few Mangoes are Apples. All Apples are Fruits. Conclusion: Some Mangoes are Fruits.",
+                                    options: ["True", "False", "Neither", "Either"],
+                                    ans: 0,
+                                    exp: "Since all Apples are Fruits, and some Mangoes are Apples, those common Mangoes must also be Fruits. The conclusion is True."
+                                },
+                                {
+                                    q: "Statements: No Cat is Dog. No Dog is Cow. Conclusion: No Cat is Cow.",
+                                    options: ["False", "True", "Either", "Neither"],
+                                    ans: 0,
+                                    exp: "No direct link exists between Cat and Cow. They could overlap in a possible diagram. Thus, the definite negative conclusion is False."
+                                }
+                            ]
+                        },
+                        "inequalities": {
+                            title: "Inequalities",
+                            notes: `
+                                <section>
+                                    <p><strong>Inequalities</strong> require comparing variables linked by >, <, >=, <=, or =.</p>
+                                </section>
+                            `,
+                            formula: "Check the direction of the gate. If gates are opposite (e.g. A > B < C), no relationship can be established between endpoints.",
+                            quiz: [
+                                {
+                                    q: "Statement: A > B >= C = D < E. Conclusion: A > D",
+                                    options: ["True", "False", "Either", "Neither"],
+                                    ans: 0,
+                                    exp: "Path from A to D: A > B >= C = D. Since we have a strict inequality (>) along the path, A > D is True."
+                                },
+                                {
+                                    q: "Statement: P <= Q < R = S. Conclusion: P < S",
+                                    options: ["True", "False", "Either", "Neither"],
+                                    ans: 0,
+                                    exp: "Path: P <= Q < R = S. The strict '<' gate ensures P < S is True."
+                                },
+                                {
+                                    q: "Statement: X >= Y, Y <= Z. Conclusion: X >= Z",
+                                    options: ["False", "True", "Either", "Neither"],
+                                    ans: 0,
+                                    exp: "Gates face opposite directions (X >= Y <= Z). No direct relationship exists. Thus, the conclusion is False."
+                                }
+                            ]
+                        },
+                        "coding": {
+                            title: "Coding-Decoding",
+                            notes: `
+                                <section>
+                                    <p>In banking, coded sentences are common. E.g., 'study hard now' is coded as 'ka pa la'. Match overlapping terms to decipher.</p>
+                                </section>
+                            `,
+                            formula: "Compare sentences sharing exactly one word to isolate its code.",
+                            quiz: [
+                                {
+                                    q: "If 'sky is blue' is coded as 'di ra to' and 'blue water cold' is coded as 'to na sa', what is the code for 'blue'?",
+                                    options: ["to", "di", "ra", "na"],
+                                    ans: 0,
+                                    exp: "The word 'blue' is the only common word in both sentences. The common code is 'to'."
+                                },
+                                {
+                                    q: "If 'GO' is coded as 32 and 'SHE' is coded as 49, what is the code for 'SOME'?",
+                                    options: ["56", "62", "50", "48"],
+                                    ans: 0,
+                                    exp: "The letters are coded by summing their reverse positions (A=26, Z=1). G=20, O=12 (20+12 = 32). S=8, H=19, E=22 (8+19+22 = 49). For SOME: S=8, O=12, M=14, E=22. Total = 8+12+14+22 = 56."
+                                },
+                                {
+                                    q: "If 'MOBILES' is coded as 'OQDKNGU', how is 'LAPTOP' coded?",
+                                    options: ["NCRVQR", "NCQWQR", "MDQUQP", "NCPVQP"],
+                                    ans: 0,
+                                    exp: "Pattern: Each letter is shifted +2 positions. L(+2)->N, A(+2)->C, P(+2)->R, T(+2)->V, O(+2)->Q, P(+2)->R. Code: NCRVQR."
+                                }
+                            ]
+                        },
+                        "blood": {
+                            title: "Blood Relations",
+                            notes: `
+                                <section>
+                                    <p>Solve family statements by representing generations vertically and genders with symbols (+ for male, - for female).</p>
+                                </section>
+                            `,
+                            formula: "Draw the tree using sibling lines, marriage double lines, and vertical generation levels.",
+                            quiz: [
+                                {
+                                    q: "Pointing to a man, Seema said, 'His wife is the only daughter of my father.' How is the man related to Seema?",
+                                    options: ["Husband", "Brother", "Cousin", "Brother-in-law"],
+                                    ans: 0,
+                                    exp: "Only daughter of Seema's father is Seema herself. Since the man's wife is Seema, the man is Seema's husband."
+                                },
+                                {
+                                    q: "A is the brother of B. C is the mother of A. D is the father of C. How is B's daughter related to D?",
+                                    options: ["Great-granddaughter", "Granddaughter", "Daughter", "Niece"],
+                                    ans: 0,
+                                    exp: "D is the grandfather of A and B. Thus, B's daughter is the great-granddaughter of D."
+                                },
+                                {
+                                    q: "If M * N means M is father of N, and M + N means M is sister of N, what does P * Q + R mean?",
+                                    options: ["P is father of R", "P is uncle of R", "P is brother of R", "P is son of R"],
+                                    ans: 0,
+                                    exp: "P is father of Q. Q is sister of R. Therefore, P is father of R."
+                                }
+                            ]
+                        }
+                    }
+                },
+                "english": {
+                    title: "English Language",
+                    topics: {
+                        "rc": {
+                            title: "Reading Comprehension",
+                            notes: `
+                                <section>
+                                    <p>In RC, answer questions using the passage's stated facts, rather than external assumptions.</p>
+                                </section>
+                            `,
+                            formula: "Scan questions for keywords first to speed up location in the passage text.",
+                            quiz: [
+                                {
+                                    q: "What is the primary role of a 'Title' question in Reading Comprehension?",
+                                    options: ["Reflecting the central theme of the passage", "Summarizing the first paragraph", "Displaying the author's name", "Highlighting the longest word"],
+                                    ans: 0,
+                                    exp: "A good title must capture the central theme and tone of the entire passage, not just a single section."
+                                },
+                                {
+                                    q: "If a passage praises a new policy, the tone of the author is:",
+                                    options: ["Laudatory/Appreciative", "Critical", "Apathetic", "Skeptical"],
+                                    ans: 0,
+                                    exp: "Praising implies approval and appreciation, making 'laudatory' the correct tone."
+                                },
+                                {
+                                    q: "If the passage says 'Inflation was kept at bay,' it means:",
+                                    options: ["Inflation was controlled", "Inflation increased", "Inflation was ignored", "Inflation was dangerous"],
+                                    ans: 0,
+                                    exp: "To keep something 'at bay' is an idiom meaning to control or prevent it from causing problems."
+                                }
+                            ]
+                        },
+                        "error": {
+                            title: "Error Spotting",
+                            notes: `
+                                <section>
+                                    <p>Spot grammatical errors in sentences. Key areas include subject-verb agreement and modifier errors.</p>
+                                </section>
+                            `,
+                            formula: "Ensure parallel structures in lists (e.g. 'running, swimming, and biking', not 'running, swim, and to bike').",
+                            quiz: [
+                                {
+                                    q: "Identify the error: 'Each of the students (A) / have finished (B) / their homework (C) / No error (D)'",
+                                    options: ["B", "A", "C", "D"],
+                                    ans: 0,
+                                    exp: "'Each' is a singular pronoun. It must take a singular verb. 'have finished' must be replaced by 'has finished'."
+                                },
+                                {
+                                    q: "Identify the error: 'He is senior (A) / than me (B) / in this office (C) / No error (D)'",
+                                    options: ["B", "A", "C", "D"],
+                                    ans: 0,
+                                    exp: "Latin adjectives ending in 'ior' (senior, junior, prior, prefer) are followed by 'to' instead of 'than'."
+                                },
+                                {
+                                    q: "Identify the error: 'Unless you do not work hard, (A) / you will not (B) / pass the exam (C) / No error (D)'",
+                                    options: ["A", "B", "C", "D"],
+                                    ans: 0,
+                                    exp: "'Unless' is itself a negative word. Using 'do not' with it constitutes a double negative error."
+                                }
+                            ]
+                        },
+                        "cloze": {
+                            title: "Cloze Test",
+                            notes: `
+                                <section>
+                                    <p>A cloze test features a passage with blanks. Choose the word that logically and grammatically fits the flow of ideas.</p>
+                                </section>
+                            `,
+                            formula: "Determine the positive/negative tone of the surrounding text before picking a vocabulary option.",
+                            quiz: [
+                                {
+                                    q: "The central bank decided to ___ the interest rates to curb inflation.",
+                                    options: ["hike", "slash", "maintain", "ignore"],
+                                    ans: 0,
+                                    exp: "To curb inflation, central banks typically increase or 'hike' interest rates to reduce liquidity."
+                                },
+                                {
+                                    q: "Due to heavy rains, the match was ___ to next week.",
+                                    options: ["postponed", "cancelled", "played", "abandoned"],
+                                    ans: 0,
+                                    exp: "Shifting a schedule to a future date is defined as 'postponing' the event."
+                                },
+                                {
+                                    q: "The company's profits ___ by 20% this quarter due to successful sales strategies.",
+                                    options: ["soared", "declined", "stagnated", "plummeted"],
+                                    ans: 0,
+                                    exp: "Successful strategies indicate positive growth, so 'soared' (rose rapidly) fits the context."
+                                }
+                            ]
+                        },
+                        "parajumbles": {
+                            title: "Para Jumbles",
+                            notes: `
+                                <section>
+                                    <p>Reorder sentences to form a coherent paragraph. Look for pronoun connections that point back to nouns.</p>
+                                </section>
+                            `,
+                            formula: "Identify the independent introductory sentence. It is usually a general statement introducing a topic.",
+                            quiz: [
+                                {
+                                    q: "Arrange: (P) He went to school. (Q) Ram woke up. (R) He brushed his teeth.",
+                                    options: ["QRP", "PRQ", "PQR", "RPQ"],
+                                    ans: 0,
+                                    exp: "First Ram wakes up (Q), then he brushes his teeth (R), and finally he goes to school (P)."
+                                },
+                                {
+                                    q: "Arrange: (A) This helps plants grow. (B) Sunlight contains energy. (C) It falls on green leaves.",
+                                    options: ["BCA", "ABC", "CAB", "CBA"],
+                                    ans: 0,
+                                    exp: "B introduces sunlight. C refers to it ('It falls...'). A states the consequence ('This helps...')."
+                                },
+                                {
+                                    q: "Arrange: (A) Eventually, they resolved it. (B) They had a dispute. (C) Two merchants were neighbors.",
+                                    options: ["CBA", "BCA", "ABC", "CAB"],
+                                    ans: 0,
+                                    exp: "C introduces characters. B introduces conflict. A resolves the conflict."
+                                }
+                            ]
+                        }
+                    }
+                },
+                "awareness": {
+                    title: "Banking Awareness",
+                    topics: {
+                        "terms": {
+                            title: "Banking Terminology",
+                            notes: `
+                                <section>
+                                    <p>Know core monetary terms set by RBI to regulate market liquidity and commercial banks.</p>
+                                </section>
+                            `,
+                            formula: "Repo: RBI lends to banks. Reverse Repo: RBI borrows from banks. CRR: Cash banks must store with RBI.",
+                            quiz: [
+                                {
+                                    q: "What is the rate at which RBI lends money to commercial banks for short periods?",
+                                    options: ["Repo Rate", "Reverse Repo Rate", "Bank Rate", "SDR"],
+                                    ans: 0,
+                                    exp: "Repo Rate (Repurchase Rate) is the benchmark rate at which RBI lends short-term money to commercial banks."
+                                },
+                                {
+                                    q: "What does CRR stand for in banking terms?",
+                                    options: ["Cash Reserve Ratio", "Credit Rating Ratio", "Capital Reserve Ratio", "Cash Recovery Rate"],
+                                    ans: 0,
+                                    exp: "CRR stands for Cash Reserve Ratio, the share of net demand and time liabilities that banks must keep as cash with RBI."
+                                },
+                                {
+                                    q: "What is the interest rate paid by RBI when it absorbs liquidity from commercial banks?",
+                                    options: ["Reverse Repo Rate", "Repo Rate", "Bank Rate", "Base Rate"],
+                                    ans: 0,
+                                    exp: "Reverse Repo Rate is the rate at which RBI borrows or absorbs surplus liquidity from commercial banks."
+                                }
+                            ]
+                        },
+                        "institutions": {
+                            title: "Financial Institutions",
+                            notes: `
+                                <section>
+                                    <p>Learn regulatory bodies in India: RBI (Banking), SEBI (Markets), IRDAI (Insurance), NABARD (Rural Development).</p>
+                                </section>
+                            `,
+                            formula: "Match the institution name to its primary developmental target sector.",
+                            quiz: [
+                                {
+                                    q: "Which institution is the apex body for agriculture and rural development financing in India?",
+                                    options: ["NABARD", "SIDBI", "SEBI", "RBI"],
+                                    ans: 0,
+                                    exp: "NABARD (National Bank for Agriculture and Rural Development) is the apex regulatory body for rural banking."
+                                },
+                                {
+                                    q: "Who regulates the stock markets and securities industry in India?",
+                                    options: ["SEBI", "RBI", "IRDAI", "PFRDA"],
+                                    ans: 0,
+                                    exp: "SEBI (Securities and Exchange Board of India) regulates the securities and stock market in India."
+                                },
+                                {
+                                    q: "Where is the headquarters of the Reserve Bank of India located?",
+                                    options: ["Mumbai", "New Delhi", "Kolkata", "Chennai"],
+                                    ans: 0,
+                                    exp: "The RBI was established in Kolkata but permanently moved its headquarters to Mumbai in 1937."
+                                }
+                            ]
+                        },
+                        "economy": {
+                            title: "Current Financial Economy",
+                            notes: `
+                                <section>
+                                    <p>Economic policies, Union Budgets, government welfare programs, and GDP targets are crucial sections.</p>
+                                </section>
+                            `,
+                            formula: "Keep track of recent economic survey estimates and budgetary sector allocations.",
+                            quiz: [
+                                {
+                                    q: "Who presents the Union Budget in the Parliament of India?",
+                                    options: ["Finance Minister", "Prime Minister", "RBI Governor", "President of India"],
+                                    ans: 0,
+                                    exp: "The Union Budget of India is presented annually by the Union Minister of Finance."
+                                },
+                                {
+                                    q: "What is the standard tax slab structure introduced under GST?",
+                                    options: ["5%, 12%, 18%, 28%", "4%, 10%, 15%, 25%", "6%, 12%, 18%, 30%", "5%, 10%, 20%, 30%"],
+                                    ans: 0,
+                                    exp: "Goods and Services Tax (GST) is categorized into four primary tax slabs: 5%, 12%, 18%, and 28%."
+                                },
+                                {
+                                    q: "Which index is primarily used by the RBI to measure retail inflation in India?",
+                                    options: ["Consumer Price Index (CPI)", "Wholesale Price Index (WPI)", "GDP Deflator", "Sensex"],
+                                    ans: 0,
+                                    exp: "The RBI uses the Consumer Price Index (CPI) Combined as its key anchor to measure and regulate retail inflation."
+                                }
+                            ]
+                        }
+                    }
+                }
+            }
+        },
+        "upsc": {
+            title: "UPSC Exams Dashboard",
+            subjects: {
+                "gs": {
+                    title: "General Studies I",
+                    topics: {
+                        "history": {
+                            title: "History of India & National Movement",
+                            notes: `
+                                <section>
+                                    <p>Focus on Ancient Indus settlements, Ashoka's edicts, Akbar's administrative reforms, and the Indian National Movement (INC sessions, Swadeshi, Satyagraha events).</p>
+                                </section>
+                            `,
+                            formula: "Arrange historical battles and treaties chronologically. It solves direct match-following questions.",
+                            quiz: [
+                                {
+                                    q: "Which event marked the beginning of the Civil Disobedience Movement under Gandhi?",
+                                    options: ["Dandi March", "Non-Cooperation Movement", "Quit India Movement", "Champaran Satyagraha"],
+                                    ans: 0,
+                                    exp: "Gandhiji broke the salt law at Dandi on April 6, 1930, marking the official launch of the Civil Disobedience Movement."
+                                },
+                                {
+                                    q: "The Indus Valley site of Harappa is situated on the banks of which river?",
+                                    options: ["Ravi", "Indus", "Sutlej", "Ghaggar"],
+                                    ans: 0,
+                                    exp: "Harappa is located on the banks of the Ravi River, while Mohenjo-daro is located on the Indus River."
+                                },
+                                {
+                                    q: "Who was the founder of the Maurya Empire in India?",
+                                    options: ["Chandragupta Maurya", "Ashoka", "Bindusara", "Chandragupta I"],
+                                    ans: 0,
+                                    exp: "Chandragupta Maurya founded the empire in 322 BCE after defeating the Nanda dynasty with Chanakya's guidance."
+                                }
+                            ]
+                        },
+                        "geography": {
+                            title: "Indian & World Geography",
+                            notes: `
+                                <section>
+                                    <p>Understand physical landscapes, monsoon systems, atmospheric pressure belts, ocean currents, and locations of major lakes, mountains, and straits.</p>
+                                </section>
+                            `,
+                            formula: "Use map markers to track geographic features like major river routes and mountain passes.",
+                            quiz: [
+                                {
+                                    q: "Which strait connects the Red Sea to the Gulf of Aden?",
+                                    options: ["Bab-el-Mandeb", "Strait of Hormuz", "Strait of Malacca", "Bosporus Strait"],
+                                    ans: 0,
+                                    exp: "Bab-el-Mandeb connects the Red Sea to the Gulf of Aden/Arabian Sea, while Hormuz connects the Persian Gulf to the Gulf of Oman."
+                                },
+                                {
+                                    q: "Which Indian state has the longest coastline?",
+                                    options: ["Gujarat", "Andhra Pradesh", "Tamil Nadu", "Maharashtra"],
+                                    ans: 0,
+                                    exp: "Gujarat has the longest coastline in India, extending over 1,600 km."
+                                },
+                                {
+                                    q: "What type of soil covers the largest area in India?",
+                                    options: ["Alluvial Soil", "Black Soil", "Red Soil", "Laterite Soil"],
+                                    ans: 0,
+                                    exp: "Alluvial soil is the most widespread soil type in India, covering around 40% of the total land area."
+                                }
+                            ]
+                        },
+                        "polity": {
+                            title: "Indian Polity & Governance",
+                            notes: `
+                                <section>
+                                    <p>Study the Indian Constitution, the Parliament system, functions of local self-government, Judicial review, and major Constitutional Articles.</p>
+                                </section>
+                            `,
+                            formula: "Understand the hierarchy of Fundamental Rights, DPSP, and Fundamental Duties. Rights are justiciable, DPSPs are not.",
+                            quiz: [
+                                {
+                                    q: "Which Constitutional Amendment added the Municipalities provisions (Part IX-A) to the Indian Constitution?",
+                                    options: ["74th Amendment", "73rd Amendment", "42nd Amendment", "44th Amendment"],
+                                    ans: 0,
+                                    exp: "The 74th Amendment Act of 1992 constitutionalized urban local bodies (Municipalities), while the 73rd added Panchayati Raj."
+                                },
+                                {
+                                    q: "Who is the custodian of the Indian Constitution?",
+                                    options: ["The Supreme Court of India", "The President of India", "The Prime Minister", "The Parliament"],
+                                    ans: 0,
+                                    exp: "The Supreme Court acts as the final interpreter and guardian of the Constitution of India."
+                                },
+                                {
+                                    q: "Under which Article can the President declare a National Emergency?",
+                                    options: ["Article 352", "Article 356", "Article 360", "Article 368"],
+                                    ans: 0,
+                                    exp: "Article 352 deals with National Emergency. Article 356 is State Emergency (President's Rule), and Article 360 is Financial Emergency."
+                                }
+                            ]
+                        },
+                        "economy": {
+                            title: "Economic & Social Development",
+                            notes: `
+                                <section>
+                                    <p>Understand key concepts: GDP, GNP, Inflation, Fiscal Deficit, Monetary Policy Committee, Balance of Payments, and social development schemes.</p>
+                                </section>
+                            `,
+                            formula: "Focus on relationships: e.g. Higher inflation -> depreciates currency value -> boosts exports.",
+                            quiz: [
+                                {
+                                    q: "If the cash reserve ratio (CRR) is lowered by the RBI, what is its impact on credit creation?",
+                                    options: ["Credit creation will increase", "Credit creation will decrease", "No change", "It will fluctuate randomly"],
+                                    ans: 0,
+                                    exp: "Lowering CRR leaves commercial banks with more disposable cash, boosting their capacity to create credit."
+                                },
+                                {
+                                    q: "Which economic index includes elements of life expectancy, education, and per capita income?",
+                                    options: ["Human Development Index (HDI)", "Gross Domestic Product (GDP)", "Gini Coefficient", "Multidimensional Poverty Index"],
+                                    ans: 0,
+                                    exp: "HDI, published by UNDP, aggregates life expectancy, mean/expected years of schooling, and GNI per capita."
+                                },
+                                {
+                                    q: "What does the Gini Coefficient measure in an economy?",
+                                    options: ["Income Inequality", "Unemployment Rate", "Inflation Rate", "Industrial Output"],
+                                    ans: 0,
+                                    exp: "The Gini Coefficient is a statistical measure of distribution representing income or wealth inequality within a nation."
+                                }
+                            ]
+                        },
+                        "environment": {
+                            title: "Environment & Biodiversity",
+                            notes: `
+                                <section>
+                                    <p>Key topics include ecological relationships, conservation strategies, National Parks, Wildlife Sanctuaries, and global agreements like Paris Accord, CBD.</p>
+                                </section>
+                            `,
+                            formula: "Differentiate In-situ (protected habitats) from Ex-situ (artificial botanical gardens, seed bank reserves).",
+                            quiz: [
+                                {
+                                    q: "Which of the following is an example of Ex-situ conservation?",
+                                    options: ["Seed Bank", "National Park", "Biosphere Reserve", "Wildlife Sanctuary"],
+                                    ans: 0,
+                                    exp: "Ex-situ conservation involves protecting species outside their natural habitats (e.g., zoos, botanical gardens, seed banks)."
+                                },
+                                {
+                                    q: "The term 'M-STrIPES' is sometimes seen in news in the context of:",
+                                    options: ["Maintenance of Tiger Reserves", "Solar energy panels", "Indigenous satellite systems", "Organic farming methods"],
+                                    ans: 0,
+                                    exp: "M-STrIPES (Monitoring System for Tigers - Intensive Protection and Ecological Status) is a software-based Tiger reserve patrol app."
+                                },
+                                {
+                                    q: "Which protocol targets the fair and equitable sharing of benefits arising from genetic resources?",
+                                    options: ["Nagoya Protocol", "Cartagena Protocol", "Kyoto Protocol", "Montreal Protocol"],
+                                    ans: 0,
+                                    exp: "Nagoya Protocol focuses on Access and Benefit Sharing (ABS) of genetic resources. Cartagena deals with Biosafety."
+                                }
+                            ]
+                        },
+                        "science": {
+                            title: "General Science & Tech",
+                            notes: `
+                                <section>
+                                    <p>UPSC questions are highly application-based. Study biotechnology, space missions (ISRO, NASA), artificial intelligence, and basic physics/chemistry applications.</p>
+                                </section>
+                            `,
+                            formula: "Look for broad utility statements. Tech questions in UPSC often have 'all of the above' options correct due to potential future applications.",
+                            quiz: [
+                                {
+                                    q: "What technology uses quantum mechanics principles like superposition and entanglement to perform calculations?",
+                                    options: ["Quantum Computing", "Supercomputing", "Blockchain Technology", "Edge Computing"],
+                                    ans: 0,
+                                    exp: "Quantum Computing utilizes qubits that leverage superposition and entanglement to solve complex math problems at high speeds."
+                                },
+                                {
+                                    q: "What is 'Li-Fi' technology, which was recently in the news?",
+                                    options: ["High-speed data transmission using light waves", "A wireless voice service over IP", "An advanced fiber-optic network", "A satellite-based internet system"],
+                                    ans: 0,
+                                    exp: "Li-Fi (Light Fidelity) is a bidirectional, high-speed wireless communication technology that transmits data using visible light waves."
+                                },
+                                {
+                                    q: "Which hormone is commonly known as the 'emergency' or 'fight-or-flight' hormone in humans?",
+                                    options: ["Adrenaline", "Insulin", "Thyroxine", "Estrogen"],
+                                    ans: 0,
+                                    exp: "Adrenaline, secreted by adrenal glands, readies the body to respond to sudden stressors or threats."
+                                }
+                            ]
+                        }
+                    }
+                },
+                "csat": {
+                    title: "CSAT Dashboard",
+                    topics: {
+                        "quant": {
+                            title: "Quantitative Aptitude & DI",
+                            notes: `
+                                <section>
+                                    <p>CSAT requires basic numeracy (Class 10 level): percentage, speed, work, simple data interpretation, and permutation/combination principles.</p>
+                                </section>
+                            `,
+                            formula: "Qualifying marks are 33% (66 out of 200). Focus on high-accuracy sections like Arithmetic.",
+                            quiz: [
+                                {
+                                    q: "If a runner runs 10 km in 40 minutes, what is their average speed in km/h?",
+                                    options: ["15 km/h", "12 km/h", "16 km/h", "10 km/h"],
+                                    ans: 0,
+                                    exp: "Time = 40 mins = 40/60 hours = 2/3 hours. Speed = Distance / Time = 10 / (2/3) = 15 km/h."
+                                },
+                                {
+                                    q: "A sum of money doubles itself in 10 years at simple interest. What is the annual interest rate?",
+                                    options: ["10%", "5%", "12.5%", "15%"],
+                                    ans: 0,
+                                    exp: "Doubles means SI = Principal (P). SI = P * R * T / 100 => P = P * R * 10 / 100 => R = 10%."
+                                },
+                                {
+                                    q: "How many different three-letter words can be formed using the letters of the word 'CAT' without repeating letters?",
+                                    options: ["6", "3", "9", "4"],
+                                    ans: 0,
+                                    exp: "Since there are 3 distinct letters, number of permutations = 3! = 3 * 2 * 1 = 6."
+                                }
+                            ]
+                        },
+                        "reasoning": {
+                            title: "Logical Reasoning",
+                            notes: `
+                                <section>
+                                    <p>Focus on direction sensing, calendar patterns, syllogisms, coding relationships, and ranking rows.</p>
+                                </section>
+                            `,
+                            formula: "Draw maps for direction and step grids for calendar jumps (+1 day for normal year, +2 for leap year).",
+                            quiz: [
+                                {
+                                    q: "A person travels 3 km East, turns right and walks 4 km. How far are they from the starting point?",
+                                    options: ["5 km", "7 km", "6 km", "8 km"],
+                                    ans: 0,
+                                    exp: "Apply Pythagoras theorem: Shortest distance = √(3² + 4²) = √(9 + 16) = 5 km."
+                                },
+                                {
+                                    q: "If 1st January of a non-leap year is a Monday, what day is 31st December of the same year?",
+                                    options: ["Monday", "Tuesday", "Sunday", "Wednesday"],
+                                    ans: 0,
+                                    exp: "A non-leap year has 365 days, which is exactly 52 weeks and 1 day. So the year ends on the same day it starts (Monday)."
+                                },
+                                {
+                                    q: "In a row of 30 children, Ram is 11th from the right. What is his position from the left?",
+                                    options: ["20th", "21st", "19th", "22nd"],
+                                    ans: 0,
+                                    exp: "Position from Left = Total - Position from Right + 1 = 30 - 11 + 1 = 20th."
+                                }
+                            ]
+                        },
+                        "comprehension": {
+                            title: "Reading Comprehension",
+                            notes: `
+                                <section>
+                                    <p>Read the passages critically to identify assumptions, logical corollaries, or central inferences as formulated by the author.</p>
+                                </section>
+                            `,
+                            formula: "Avoid assumptions not directly supported by the passage statement logic.",
+                            quiz: [
+                                {
+                                    q: "When a passage argues for sustainable agriculture, a logical corollary is:",
+                                    options: ["Farmers must adopt eco-friendly techniques", "Industrial farming must be banned immediately", "All chemical use should be penalized", "Food prices must be regulated by governments"],
+                                    ans: 0,
+                                    exp: "Eco-friendly methods directly align with sustainability goals, without taking extreme stances like bans or penalties."
+                                },
+                                {
+                                    q: "What is the primary difference between a 'Crux' and an 'Inference' in CSAT?",
+                                    options: ["Crux is the core summary; Inference is a logical extension", "Crux is false; Inference is true", "Crux is long; Inference is short", "There is no difference"],
+                                    ans: 0,
+                                    exp: "The 'crux' is the central message or main point of the passage. An 'inference' is a logical conclusion derived from the stated premises."
+                                },
+                                {
+                                    q: "If the author is pessimistic about climate targets, they believe:",
+                                    options: ["Targets are unlikely to be achieved", "Targets are very easy to meet", "Climate change is a hoax", "Fossil fuels are clean"],
+                                    ans: 0,
+                                    exp: "Pessimism implies a negative outlook, meaning they doubt the targets will be met."
+                                }
+                            ]
+                        }
+                    }
+                }
+            }
+        },
+        "tnpsc": {
+            title: "TNPSC Exams Dashboard",
+            subjects: {
+                "gs": {
+                    title: "General Studies",
+                    topics: {
+                        "history": {
+                            title: "History & Culture of India",
+                            notes: `
+                                <section>
+                                    <p>Covers Indus Valley Civilisation, Guptas, Delhi Sultanate, Mughals, Marathas, and the British rule in India.</p>
+                                </section>
+                            `,
+                            formula: "Memorize major battles (Tarain, Panipat, Plassey) and their participants.",
+                            quiz: [
+                                {
+                                    q: "Who was the ruler of Delhi Sultanate when Ibn Battuta visited India?",
+                                    options: ["Muhammad bin Tughlaq", "Alauddin Khilji", "Firoz Shah Tughlaq", "Ghiyasuddin Balban"],
+                                    ans: 0,
+                                    exp: "Ibn Battuta, the Moroccan traveler, visited India during the reign of Muhammad bin Tughlaq."
+                                },
+                                {
+                                    q: "Between whom was the Battle of Plassey fought in 1757?",
+                                    options: ["Siraj-ud-daulah and Robert Clive", "Mir Qasim and Hector Munro", "Shuja-ud-daulah and Warren Hastings", "Tipu Sultan and Cornwallis"],
+                                    ans: 0,
+                                    exp: "The Battle of Plassey was fought on June 23, 1757, between the Nawab of Bengal (Siraj-ud-daulah) and the British East India Company forces led by Robert Clive."
+                                },
+                                {
+                                    q: "Who is known as the 'Napoleon of India' due to his military conquests?",
+                                    options: ["Samudragupta", "Chandragupta Maurya", "Ashoka", "Harsha"],
+                                    ans: 0,
+                                    exp: "Historian V.A. Smith called Samudragupta the 'Napoleon of India' because of his extensive military campaigns and victories."
+                                }
+                            ]
+                        },
+                        "polity": {
+                            title: "Indian Polity",
+                            notes: `
+                                <section>
+                                    <p>Covers the Preamble, Fundamental Rights, Union & State executives, Judiciary, and local bodies like Panchayats.</p>
+                                </section>
+                            `,
+                            formula: "Learn schedules of the Constitution (e.g. Schedule 8 - Languages, Schedule 11 - Panchayats).",
+                            quiz: [
+                                {
+                                    q: "Which article of the Indian Constitution guarantees the Right to Equality?",
+                                    options: ["Articles 14-18", "Articles 19-22", "Articles 23-24", "Articles 25-28"],
+                                    ans: 0,
+                                    exp: "Right to Equality is guaranteed under Articles 14 to 18 of the Indian Constitution."
+                                },
+                                {
+                                    q: "How many schedules are there in the Constitution of India currently?",
+                                    options: ["12", "8", "10", "11"],
+                                    ans: 0,
+                                    exp: "The Indian Constitution originally had 8 schedules, but currently has 12 schedules."
+                                },
+                                {
+                                    q: "Who is the ex-officio Chairman of the Rajya Sabha?",
+                                    options: ["The Vice-President of India", "The President of India", "The Prime Minister", "The Speaker of Lok Sabha"],
+                                    ans: 0,
+                                    exp: "The Vice-President of India is the ex-officio Chairman of the Rajya Sabha as per Article 64."
+                                }
+                            ]
+                        },
+                        "geography": {
+                            title: "Geography of India & Tamil Nadu",
+                            notes: `
+                                <section>
+                                    <p>Covers landforms, monsoons, soil varieties, forests, wildlife reserves, and resources of India and Tamil Nadu specifically.</p>
+                                </section>
+                            `,
+                            formula: "Map out the major rivers of Tamil Nadu: Cauvery, Vaigai, Thamirabarani, Palar, and Pennar.",
+                            quiz: [
+                                {
+                                    q: "Which is the highest peak in the Western Ghats and South India?",
+                                    options: ["Anamudi", "Doddabetta", "Mahendragiri", "Kalsubai"],
+                                    ans: 0,
+                                    exp: "Anamudi (2,695m) in Kerala is the highest peak in South India. Doddabetta (2,637m) is the highest in the Nilgiris."
+                                },
+                                {
+                                    q: "Which river is known as the 'Dakshin Ganga' or the Ganges of the South?",
+                                    options: ["Godavari", "Cauvery", "Krishna", "Narmada"],
+                                    ans: 0,
+                                    exp: "Godavari is the longest peninsular river and is called Dakshin Ganga due to its size and extent."
+                                },
+                                {
+                                    q: "Where is the Guindy National Park located in Tamil Nadu?",
+                                    options: ["Chennai", "Coimbatore", "Madurai", "Nilgiris"],
+                                    ans: 0,
+                                    exp: "Guindy National Park is a protected area located in Chennai, Tamil Nadu. It is one of the few national parks located inside a city."
+                                }
+                            ]
+                        },
+                        "economy": {
+                            title: "Indian Economy",
+                            notes: `
+                                <section>
+                                    <p>Covers five-year plans, NITI Aayog, financial policies, GST, banking, and rural development programs in India and Tamil Nadu.</p>
+                                </section>
+                            `,
+                            formula: "Recall key regulatory ratios: Repo Rate, CRR, SLR, and fiscal budget highlights.",
+                            quiz: [
+                                {
+                                    q: "When was the Goods and Services Tax (GST) implemented in India?",
+                                    options: ["July 1, 2017", "April 1, 2016", "January 1, 2018", "July 1, 2018"],
+                                    ans: 0,
+                                    exp: "GST was launched across India on July 1, 2017, replacing multiple indirect taxes."
+                                },
+                                {
+                                    q: "Which body replaced the Planning Commission of India in 2015?",
+                                    options: ["NITI Aayog", "National Development Council", "Finance Commission", "GST Council"],
+                                    ans: 0,
+                                    exp: "NITI Aayog (National Institution for Transforming India) was established on January 1, 2015, replacing the Planning Commission."
+                                },
+                                {
+                                    q: "In which city is the Tamil Nadu Newsprint and Papers Limited (TNPL) factory located?",
+                                    options: ["Karur", "Salem", "Coimbatore", "Trichy"],
+                                    ans: 0,
+                                    exp: "TNPL's primary paper factory is located at Kagithapuram in Karur district, Tamil Nadu."
+                                }
+                            ]
+                        },
+                        "tamilculture": {
+                            title: "History, Culture & Socio-Political Movements in TN",
+                            notes: `
+                                <section>
+                                    <p>Focuses on Keezhadi archaeological excavations, Sangam age, Bhakti movement, Justice Party, Self-Respect Movement, and social reforms in Tamil Nadu.</p>
+                                </section>
+                            `,
+                            formula: "Connect leaders to their journals: e.g. E.V.R. Periyar -> Kudi Arasu; Ayothithasa Pandithar -> Oru Paisa Tamilan.",
+                            quiz: [
+                                {
+                                    q: "In which district is the famous archaeological site of Keezhadi located?",
+                                    options: ["Sivagangai", "Madurai", "Thanjavur", "Ramanathapuram"],
+                                    ans: 0,
+                                    exp: "Keezhadi excavation site is situated in the Thiruppuvanam taluk of Sivagangai district, near Madurai."
+                                },
+                                {
+                                    q: "Who founded the Self-Respect Movement in Tamil Nadu in 1925?",
+                                    options: ["E.V. Ramasamy (Periyar)", "C. Natesan", "T.M. Nair", "P. Theagaraya Chetty"],
+                                    ans: 0,
+                                    exp: "Periyar E.V. Ramasamy started the Self-Respect Movement in 1925 to advocate for a casteless and rationalist society."
+                                },
+                                {
+                                    q: "Which journal was started by Periyar E.V.R. in 1925 to propagate his ideas?",
+                                    options: ["Kudi Arasu", "Revolt", "Viduthalai", "Pahutharivu"],
+                                    ans: 0,
+                                    exp: "Kudi Arasu (Republic) was the weekly magazine started by Periyar in 1925 as the official organ of the Self-Respect Movement."
+                                }
+                            ]
+                        }
+                    }
+                },
+                "aptitude": {
+                    title: "Aptitude and Mental Ability",
+                    topics: {
+                        "simplification": {
+                            title: "Simplification & Percentage",
+                            notes: `
+                                <section>
+                                    <p>Covers basic arithmetic calculations using BODMAS, fractions, decimal values, and percentages.</p>
+                                </section>
+                            `,
+                            formula: "Always simplify terms inside brackets first. E.g., (12 + 8) / 4 = 20 / 4 = 5.",
+                            quiz: [
+                                {
+                                    q: "Evaluate: 20% of 150 + 30% of 200 = ?",
+                                    options: ["90", "80", "100", "75"],
+                                    ans: 0,
+                                    exp: "20% of 150 = 30. 30% of 200 = 60. 30 + 60 = 90."
+                                },
+                                {
+                                    q: "Solve: 240 ÷ 12 + 6 × 5 = ?",
+                                    options: ["50", "45", "60", "40"],
+                                    ans: 0,
+                                    exp: "Follow BODMAS: 240 / 12 = 20. 6 * 5 = 30. 20 + 30 = 50."
+                                },
+                                {
+                                    q: "Find the value of x if 25% of x = 120.",
+                                    options: ["480", "360", "400", "500"],
+                                    ans: 0,
+                                    exp: "(25/100) * x = 120 => x = 120 * 4 = 480."
+                                }
+                            ]
+                        },
+                        "hcf": {
+                            title: "HCF & LCM",
+                            notes: `
+                                <section>
+                                    <p>HCF (Highest Common Factor) is the largest divisor. LCM (Lowest Common Multiple) is the smallest common multiple.</p>
+                                </section>
+                            `,
+                            formula: "HCF × LCM = Product of the two numbers.",
+                            quiz: [
+                                {
+                                    q: "Find the HCF of 12 and 18.",
+                                    options: ["6", "3", "12", "36"],
+                                    ans: 0,
+                                    exp: "Factors of 12: 1,2,3,4,6,12. Factors of 18: 1,2,3,6,9,18. The highest common factor is 6."
+                                },
+                                {
+                                    q: "Find the LCM of 12 and 18.",
+                                    options: ["36", "72", "18", "54"],
+                                    ans: 0,
+                                    exp: "Multiples of 12: 12,24,36,48. Multiples of 18: 18,36,54. The lowest common multiple is 36."
+                                },
+                                {
+                                    q: "The HCF of two numbers is 4 and their LCM is 24. If one number is 8, find the other number.",
+                                    options: ["12", "6", "8", "16"],
+                                    ans: 0,
+                                    exp: "Formula: Number1 * Number2 = HCF * LCM => 8 * x = 4 * 24 => 8x = 96 => x = 12."
+                                }
+                            ]
+                        },
+                        "ratio": {
+                            title: "Ratio & Proportion",
+                            notes: `
+                                <section>
+                                    <p>Ratios compare quantities by division. Proportions express equality of two ratios (a/b = c/d).</p>
+                                </section>
+                            `,
+                            formula: "If a:b = 2:3 and b:c = 4:5, then a:b:c = 8:12:15.",
+                            quiz: [
+                                {
+                                    q: "If A:B = 2:3 and B:C = 4:5, find A:B:C.",
+                                    options: ["8:12:15", "2:4:5", "8:10:15", "6:12:15"],
+                                    ans: 0,
+                                    exp: "Multiply A:B by 4 -> 8:12. Multiply B:C by 3 -> 12:15. Combining gives 8:12:15."
+                                },
+                                {
+                                    q: "Divide $1200 between A and B in the ratio 3:5. What is A's share?",
+                                    options: ["$450", "$750", "$400", "$600"],
+                                    ans: 0,
+                                    exp: "Total parts = 3 + 5 = 8 parts. 8 parts = $1200 => 1 part = $150. A's share (3 parts) = 3 * 150 = $450."
+                                },
+                                {
+                                    q: "If 4, x, 9, 18 are in proportion, find x.",
+                                    options: ["8", "6", "10", "12"],
+                                    ans: 0,
+                                    exp: "In proportion: 4/x = 9/18 => 4/x = 1/2 => x = 8."
+                                }
+                            ]
+                        },
+                        "interest": {
+                            title: "Simple & Compound Interest",
+                            notes: `
+                                <section>
+                                    <p>Simple Interest is calculated on principal only. Compound interest is interest computed on principal plus accumulated interest.</p>
+                                </section>
+                            `,
+                            formula: "SI = P*R*T/100. Amount under CI = P(1 + R/100)^T.",
+                            quiz: [
+                                {
+                                    q: "Find the simple interest on $5000 at 10% per annum for 2 years.",
+                                    options: ["$1000", "$500", "$1200", "$800"],
+                                    ans: 0,
+                                    exp: "SI = P * R * T / 100 = 5000 * 10 * 2 / 100 = $1000."
+                                },
+                                {
+                                    q: "Find the compound interest on $1000 at 10% per annum for 2 years compounded annually.",
+                                    options: ["$210", "$200", "$100", "$220"],
+                                    ans: 0,
+                                    exp: "Amount = 1000 * (1 + 10/100)² = 1000 * (1.1)² = 1000 * 1.21 = $1210. CI = Amount - Principal = 1210 - 1000 = $210."
+                                },
+                                {
+                                    q: "What will be the difference between SI and CI on a principal of $1000 at 10% rate for 2 years?",
+                                    options: ["$10", "$20", "$5", "$15"],
+                                    ans: 0,
+                                    exp: "SI = 1000 * 10 * 2 / 100 = $200. CI = $210. Difference = CI - SI = 210 - 200 = $10."
+                                }
+                            ]
+                        },
+                        "mensuration": {
+                            title: "Area & Volume (Mensuration)",
+                            notes: `
+                                <section>
+                                    <p>Deals with geometric properties, areas of 2D shapes, and volumes/surface areas of 3D shapes.</p>
+                                </section>
+                            `,
+                            formula: "Area of Circle = πr². Volume of Cylinder = πr²h. Volume of Sphere = (4/3)πr³.",
+                            quiz: [
+                                {
+                                    q: "Find the area of a circle whose radius is 7 cm. (Take π = 22/7)",
+                                    options: ["154 cm²", "44 cm²", "77 cm²", "148 cm²"],
+                                    ans: 0,
+                                    exp: "Area = πr² = (22/7) * 7 * 7 = 154 cm²."
+                                },
+                                {
+                                    q: "Find the volume of a cylinder with radius 7 cm and height 10 cm.",
+                                    options: ["1540 cm³", "770 cm³", "1480 cm³", "154 cm³"],
+                                    ans: 0,
+                                    exp: "Volume = πr²h = (22/7) * 7 * 7 * 10 = 154 * 10 = 1540 cm³."
+                                },
+                                {
+                                    q: "Find the surface area of a cube whose side is 5 cm.",
+                                    options: ["150 cm²", "125 cm²", "100 cm²", "75 cm²"],
+                                    ans: 0,
+                                    exp: "Surface Area = 6 * side² = 6 * 5² = 6 * 25 = 150 cm²."
+                                }
+                            ]
+                        },
+                        "work": {
+                            title: "Time & Work",
+                            notes: `
+                                <section>
+                                    <p>Analyzes work rates of individuals or groups. Net work is usually taken as 1 unit.</p>
+                                </section>
+                            `,
+                            formula: "If A can do a work in 'x' days and B in 'y' days, together they do it in xy/(x+y) days.",
+                            quiz: [
+                                {
+                                    q: "A can do a work in 10 days and B can do it in 15 days. How many days will they take to complete it working together?",
+                                    options: ["6 days", "5 days", "7 days", "8 days"],
+                                    ans: 0,
+                                    exp: "Formula: xy / (x+y) = (10 * 15) / (10 + 15) = 150 / 25 = 6 days."
+                                },
+                                {
+                                    q: "A and B together can do a work in 4 days. If A alone can do it in 12 days, how many days will B take alone?",
+                                    options: ["6 days", "8 days", "5 days", "7 days"],
+                                    ans: 0,
+                                    exp: "B's 1-day work = 1/4 - 1/12 = (3 - 1)/12 = 2/12 = 1/6. Hence, B alone takes 6 days."
+                                },
+                                {
+                                    q: "If 10 men can do a work in 6 days, in how many days can 15 men do the same work?",
+                                    options: ["4 days", "3 days", "5 days", "6 days"],
+                                    ans: 0,
+                                    exp: "Formula: M1 * D1 = M2 * D2 => 10 * 6 = 15 * D2 => 60 = 15 * D2 => D2 = 4 days."
+                                }
+                            ]
+                        }
+                    }
+                },
+                "tamil": {
+                    title: "Tamil Language & Culture",
+                    topics: {
+                        "thirukkural": {
+                            title: "Thirukkural",
+                            notes: `
+                                <section>
+                                    <p>Thirukkural is a classic Tamil text consisting of 1330 couplets (Kurals) divided into 133 chapters. It deals with Aram (virtue), Porul (wealth), and Inbam (love).</p>
+                                </section>
+                            `,
+                            formula: "Study couplets relating to statecraft, administration, friendship, and ethics.",
+                            quiz: [
+                                {
+                                    q: "How many Kurals (couplets) are there in Thirukkural in total?",
+                                    options: ["1330", "133", "1000", "1500"],
+                                    ans: 0,
+                                    exp: "Thirukkural has 133 chapters with 10 couplets each, totaling 1330 couplets."
+                                },
+                                {
+                                    q: "Who is the author of Thirukkural?",
+                                    options: ["Thiruvalluvar", "Kambar", "Avvaiyar", "Ilango Adigal"],
+                                    ans: 0,
+                                    exp: "Thirukkural was written by the Tamil poet-philosopher Thiruvalluvar."
+                                },
+                                {
+                                    q: "Under which division (Paal) does state administration and economy fall in Thirukkural?",
+                                    options: ["Porutpaal", "Arathuppaal", "Kamathuppaal", "Inbathuppaal"],
+                                    ans: 0,
+                                    exp: "Porutpaal (Wealth/Polity) deals with statecraft, administration, citizenship, and economics."
+                                }
+                            ]
+                        },
+                        "literature": {
+                            title: "Tamil Literature & Epics",
+                            notes: `
+                                <section>
+                                    <p>Covers Sangam Literature (Ettuthokai, Pathuppattu), Eighteen Lesser Texts (Pathinenkilkanakku), and the Five Great Epics (Silappathikaram, Manimekalai, Civaka Cintamani, Valayapathi, Kundalakesi).</p>
+                                </section>
+                            `,
+                            formula: "Differentiate Aham (inner feelings/love) from Puram (outer actions/valor) in Sangam poetry.",
+                            quiz: [
+                                {
+                                    q: "Which epic is known as the first epic in Tamil literature (Kappiyam)?",
+                                    options: ["Silappathikaram", "Manimekalai", "Civaka Cintamani", "Kundalakesi"],
+                                    ans: 0,
+                                    exp: "Silappathikaram, written by Ilango Adigal, is considered the first and primary epic in Tamil literature."
+                                },
+                                {
+                                    q: "Who is the author of the epic Silappathikaram?",
+                                    options: ["Ilango Adigal", "Sithalai Sathanar", "Tirutakkatevar", "Kambar"],
+                                    ans: 0,
+                                    exp: "Ilango Adigal, a Chera prince, wrote Silappathikaram. Sathanar wrote its sequel, Manimekalai."
+                                },
+                                {
+                                    q: "How many anthologies form the 'Ettuthokai' group of Sangam literature?",
+                                    options: ["Eight", "Ten", "Eighteen", "Five"],
+                                    ans: 0,
+                                    exp: "Ettuthokai translates directly to 'Eight Anthologies', which are core collections of Sangam poetry."
+                                }
+                            ]
+                        },
+                        "scholars": {
+                            title: "Tamil Scholars & History",
+                            notes: `
+                                <section>
+                                    <p>Covers modern Tamil writers and scholars (Bharathiyar, Bharathidasan, Namakkal Kavignar, Kavimani) and social reformers who contributed to the Tamil language renaissance.</p>
+                                </section>
+                            `,
+                            formula: "Match poems to authors: e.g. 'Kuyil Pattu' -> Bharathiyar; 'Kudumba Vilakku' -> Bharathidasan.",
+                            quiz: [
+                                {
+                                    q: "Who wrote the patriotic poem 'Kuyil Pattu' and 'Panchali Sabatham'?",
+                                    options: ["Subramania Bharathiyar", "Bharathidasan", "Kavimani Desigavinayagam Pillai", "Namakkal Kavignar Ramalingam Pillai"],
+                                    ans: 0,
+                                    exp: "Mahakavi Subramania Bharathiyar wrote Kuyil Pattu, Panchali Sabatham, and many nationalistic Tamil songs."
+                                },
+                                {
+                                    q: "Who is known as 'Puratchi Kavignar' (Revolutionary Poet) in Tamil literature?",
+                                    options: ["Bharathidasan", "Bharathiyar", "Kalyanasundaram", "Kannadasan"],
+                                    ans: 0,
+                                    exp: "Kanagasabai Subburathinam, who wrote under the pen name Bharathidasan, is called Puratchi Kavignar for his progressive views."
+                                },
+                                {
+                                    q: "Who wrote the famous quote 'Kathi indri ratham indri yuddham ondru varuthu'?",
+                                    options: ["Namakkal Kavignar", "Bharathiyar", "Bharathidasan", "Kavimani"],
+                                    ans: 0,
+                                    exp: "Namakkal Kavignar Ramalingam Pillai wrote this famous song for the Vedaranyam Salt Satyagraha led by Rajaji."
+                                }
+                            ]
+                        }
+                    }
+                }
+            }
+        }
+    };
+
+    let activeExam = "";
+    let activeSubject = "";
+    let activeTopic = "";
+
+    function init() {
+        const urlParams = new URLSearchParams(window.location.search);
+        const examParam = urlParams.get('exam');
+        const subjectParam = urlParams.get('subject');
+        const topicParam = urlParams.get('topic');
+
+        if (!examParam || !examData[examParam] || !subjectParam || !examData[examParam].subjects[subjectParam]) {
+            // Redirect to home if params invalid
+            window.location.href = "index.html";
+            return;
+        }
+
+        activeExam = examParam;
+        activeSubject = subjectParam;
+
+        const examObj = examData[activeExam];
+        const subjectObj = examObj.subjects[activeSubject];
+
+        // Update nav and titles
+        document.getElementById("dashboard-subtitle").innerText = examObj.title + " - " + subjectObj.title;
+        document.title = subjectObj.title + " Dashboard - GovtExamHub";
+        
+        const navExam = document.getElementById("nav-exam");
+        navExam.href = activeExam + ".html";
+        navExam.className = "active";
+        navExam.innerText = activeExam.toUpperCase() + " Exam";
+
+        // Determine initial active topic
+        const topicKeys = Object.keys(subjectObj.topics);
+        if (topicParam && subjectObj.topics[topicParam]) {
+            activeTopic = topicParam;
+        } else if (topicKeys.length > 0) {
+            activeTopic = topicKeys[0];
+        }
+
+        renderTopicList();
+        loadTopic(activeTopic);
+        updateProgress();
+    }
+
+    function renderTopicList() {
+        const list = document.getElementById("topic-list");
+        list.innerHTML = "";
+        
+        const subjectObj = examData[activeExam].subjects[activeSubject];
+        
+        Object.keys(subjectObj.topics).forEach(key => {
+            const topic = subjectObj.topics[key];
+            const storageKey = `progress_${activeExam}_${activeSubject}_${key}`;
+            const isCompleted = localStorage.getItem(storageKey) === 'completed';
+            
+            const li = document.createElement("li");
+            li.className = `topic-item ${key === activeTopic ? 'active' : ''} ${isCompleted ? 'completed' : ''}`;
+            li.id = `item-${key}`;
+            li.setAttribute("onclick", `selectTopic('${key}')`);
+            
+            li.innerHTML = `
+                <span>${topic.title}</span>
+                <span class="chk-complete"></span>
+            `;
+            list.appendChild(li);
+        });
+    }
+
+    function selectTopic(key) {
+        activeTopic = key;
+        
+        // Update active class in sidebar
+        document.querySelectorAll(".topic-item").forEach(item => {
+            item.classList.remove("active");
+        });
+        const element = document.getElementById(`item-${key}`);
+        if (element) element.classList.add("active");
+        
+        // Push state to URL without reloading
+        const newUrl = window.location.protocol + "//" + window.location.host + window.location.pathname + `?exam=${activeExam}&subject=${activeSubject}&topic=${key}`;
+        window.history.pushState({path: newUrl}, '', newUrl);
+
+        loadTopic(key);
+    }
+
+    function loadTopic(key) {
+        const subjectObj = examData[activeExam].subjects[activeSubject];
+        const topic = subjectObj.topics[key];
+        
+        if (!topic) return;
+        
+        document.getElementById("topic-title").innerText = topic.title;
+        
+        // Populate Notes & Formula Box
+        document.getElementById("topic-notes").innerHTML = `
+            ${topic.notes}
+            <div class="formula-box">
+                <strong>Tips & Key Concept:</strong> ${topic.formula}
+            </div>
+        `;
+
+        // Update Complete Button
+        const storageKey = `progress_${activeExam}_${activeSubject}_${key}`;
+        const isCompleted = localStorage.getItem(storageKey) === 'completed';
+        const btn = document.getElementById("complete-btn");
+        const btnText = document.getElementById("btn-text");
+        if (isCompleted) {
+            btn.classList.add("completed");
+            btnText.innerText = "Completed";
+        } else {
+            btn.classList.remove("completed");
+            btnText.innerText = "Mark as Completed";
+        }
+
+        // Load Quiz
+        const quizContainer = document.getElementById("quiz-container");
+        quizContainer.innerHTML = "";
+        
+        if (topic.quiz && topic.quiz.length > 0) {
+            topic.quiz.forEach((qObj, index) => {
+                const card = document.createElement("div");
+                card.className = "quiz-card";
+                
+                let optionsHTML = "";
+                qObj.options.forEach((opt, optIndex) => {
+                    optionsHTML += `
+                        <li class="quiz-option" onclick="checkAnswer(this, ${index}, ${optIndex}, ${qObj.ans})">${opt}</li>
+                    `;
+                });
+
+                card.innerHTML = `
+                    <div class="quiz-question">Q${index + 1}: ${qObj.q}</div>
+                    <ul class="quiz-options">
+                        ${optionsHTML}
+                    </ul>
+                    <button class="reveal-btn" onclick="toggleExplanation(${index})">Show Answer & Explanation</button>
+                    <div class="explanation" id="exp-${index}">${qObj.exp}</div>
+                `;
+                quizContainer.appendChild(card);
+            });
+        } else {
+            quizContainer.innerHTML = "<p>No practice questions available for this topic yet.</p>";
+        }
+    }
+
+    function checkAnswer(element, questionIndex, selectedIndex, correctIndex) {
+        const parent = element.parentElement;
+        const options = parent.querySelectorAll(".quiz-option");
+        
+        // Disable multiple clicks
+        options.forEach(opt => {
+            opt.style.pointerEvents = "none";
+        });
+
+        if (selectedIndex === correctIndex) {
+            element.classList.add("correct");
+        } else {
+            element.classList.add("wrong");
+            options[correctIndex].classList.add("correct");
+        }
+        
+        toggleExplanation(questionIndex, true);
+    }
+
+    function toggleExplanation(index, forceShow = false) {
+        const expDiv = document.getElementById(`exp-${index}`);
+        if (!expDiv) return;
+        if (forceShow || expDiv.style.display === "none" || !expDiv.style.display) {
+            expDiv.style.display = "block";
+        } else {
+            expDiv.style.display = "none";
+        }
+    }
+
+    function toggleTopicComplete() {
+        const key = activeTopic;
+        const storageKey = `progress_${activeExam}_${activeSubject}_${key}`;
+        const isCompleted = localStorage.getItem(storageKey) === 'completed';
+        const sidebarItem = document.getElementById(`item-${key}`);
+        const btn = document.getElementById("complete-btn");
+        const btnText = document.getElementById("btn-text");
+
+        if (isCompleted) {
+            localStorage.removeItem(storageKey);
+            if (sidebarItem) sidebarItem.classList.remove("completed");
+            btn.classList.remove("completed");
+            btnText.innerText = "Mark as Completed";
+        } else {
+            localStorage.setItem(storageKey, 'completed');
+            if (sidebarItem) sidebarItem.classList.add("completed");
+            btn.classList.add("completed");
+            btnText.innerText = "Completed";
+        }
+        
+        updateProgress();
+    }
+
+    function updateProgress() {
+        const subjectObj = examData[activeExam].subjects[activeSubject];
+        const keys = Object.keys(subjectObj.topics);
+        const total = keys.length;
+        if (total === 0) return;
+        
+        let completed = 0;
+        keys.forEach(key => {
+            const storageKey = `progress_${activeExam}_${activeSubject}_${key}`;
+            if (localStorage.getItem(storageKey) === 'completed') {
+                completed++;
+            }
+        });
+
+        const percent = Math.round((completed / total) * 100);
+        document.getElementById("progress-bar").style.width = percent + "%";
+        document.getElementById("progress-text").innerText = percent + "%";
+    }
+
+    function filterTopics() {
+        const input = document.getElementById("search-input").value.toLowerCase();
+        const items = document.querySelectorAll(".topic-item");
+        
+        items.forEach(item => {
+            const text = item.innerText.toLowerCase();
+            if (text.includes(input)) {
+                item.style.display = "flex";
+            } else {
+                item.style.display = "none";
+            }
+        });
+    }
+
+    window.onload = init;
+</script>
+</body>
+</html>
