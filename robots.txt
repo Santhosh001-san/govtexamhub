@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://santhosh001-san.github.io/govtexamhub/sitemap.xml
