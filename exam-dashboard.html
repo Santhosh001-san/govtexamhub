@@ -1283,6 +1283,379 @@
                     }
                 }
             }
+        },
+        "railway": {
+            title: "Railway Exams Dashboard",
+            subjects: {
+                "quant": {
+                    title: "Mathematics",
+                    topics: {
+                        "arithmetic": {
+                            title: "Arithmetic Word Problems",
+                            notes: `
+                                <section>
+                                    <p>Arithmetic word problems are central to RRB exams. Focus on quick formulas for percentage increases, profit and loss, interest, and ratio partition.</p>
+                                </section>
+                            `,
+                            formula: "Use approximation and short percentage multipliers: e.g. 10% increase = multiply by 1.1.",
+                            quiz: [
+                                {
+                                    q: "A vendor buys apples at 10 for $8 and sells them at 8 for $10. What is his profit percentage?",
+                                    options: ["56.25%", "50%", "60%", "62.5%"],
+                                    ans: 0,
+                                    exp: "Cost Price (CP) of 1 apple = 8/10 = $0.8. Selling Price (SP) of 1 apple = 10/8 = $1.25. Profit = SP - CP = 1.25 - 0.8 = $0.45. Profit % = (0.45 / 0.8) * 100 = 56.25%."
+                                },
+                                {
+                                    q: "The average age of 30 students in a class is 15 years. If the teacher's age is included, the average increases by 1 year. Find the teacher's age.",
+                                    options: ["46 years", "45 years", "40 years", "50 years"],
+                                    ans: 0,
+                                    exp: "Sum of ages of students = 30 * 15 = 450. Sum with teacher = 31 * 16 = 496. Teacher's age = 496 - 450 = 46 years."
+                                },
+                                {
+                                    q: "A train travels at 72 km/h. What is its speed in metres per second (m/s)?",
+                                    options: ["20 m/s", "15 m/s", "25 m/s", "30 m/s"],
+                                    ans: 0,
+                                    exp: "To convert km/h to m/s, multiply by 5/18. Speed = 72 * 5/18 = 4 * 5 = 20 m/s."
+                                }
+                            ]
+                        },
+                        "numbersystem": {
+                            title: "Number System & Fractions",
+                            notes: `
+                                <section>
+                                    <p>Number System covers properties of integers, place values, recurring decimals, fractions comparison, and BODMAS calculation hierarchies.</p>
+                                </section>
+                            `,
+                            formula: "Recall: Product of two numbers = LCM × HCF. Compare fractions by cross-multiplication.",
+                            quiz: [
+                                {
+                                    q: "Evaluate using BODMAS: 25 - [20 - {10 - (8 - 5)}]",
+                                    options: ["12", "15", "10", "18"],
+                                    ans: 0,
+                                    exp: "Inner bracket: 8 - 5 = 3. Next: 10 - 3 = 7. Next: 20 - 7 = 13. Finally: 25 - 13 = 12."
+                                },
+                                {
+                                    q: "Find the HCF of 24, 36, and 60.",
+                                    options: ["12", "6", "18", "24"],
+                                    ans: 0,
+                                    exp: "The factors are: 24 (12*2), 36 (12*3), 60 (12*5). The largest common divisor is 12."
+                                },
+                                {
+                                    q: "Which of the following fractions is the largest: 3/5, 4/7, 5/9, 2/3?",
+                                    options: ["2/3", "3/5", "4/7", "5/9"],
+                                    ans: 0,
+                                    exp: "Decimal values: 3/5 = 0.6; 4/7 ≈ 0.57; 5/9 ≈ 0.55; 2/3 ≈ 0.67. Hence, 2/3 is the largest."
+                                }
+                            ]
+                        },
+                        "mensuration": {
+                            title: "Area & Volume (Mensuration)",
+                            notes: `
+                                <section>
+                                    <p>Deals with 2D shape areas (rectangles, triangles, circles) and 3D surface areas/volumes (cylinders, cones, spheres).</p>
+                                </section>
+                            `,
+                            formula: "Volume of cylinder = πr²h. Volume of cone = (1/3)πr²h. Volume of sphere = (4/3)πr³.",
+                            quiz: [
+                                {
+                                    q: "The radius of a circular track is 14 m. Find the distance covered in 3 rounds. (Take π = 22/7)",
+                                    options: ["264 m", "88 m", "176 m", "300 m"],
+                                    ans: 0,
+                                    exp: "Circumference = 2πr = 2 * (22/7) * 14 = 88 m. In 3 rounds, distance = 3 * 88 = 264 m."
+                                },
+                                {
+                                    q: "Find the volume of a sphere of radius 3 cm.",
+                                    options: ["36π cm³", "12π cm³", "18π cm³", "24π cm³"],
+                                    ans: 0,
+                                    exp: "Volume = (4/3) * π * r³ = (4/3) * π * 27 = 36π cm³."
+                                },
+                                {
+                                    q: "If the length and width of a rectangle are doubled, what is the change in its area?",
+                                    options: ["Area becomes 4 times", "Area is doubled", "Area is halved", "No change"],
+                                    ans: 0,
+                                    exp: "New area = (2L) * (2W) = 4 * (L * W) = 4 times the original area."
+                                }
+                            ]
+                        }
+                    }
+                },
+                "reasoning": {
+                    title: "General Intelligence & Reasoning",
+                    topics: {
+                        "analogy": {
+                            title: "Analogy & Classification",
+                            notes: `
+                                <section>
+                                    <p>Identify logic links in first pairs and mirror them. Classification asks to detect the single 'odd one out' from lists.</p>
+                                </section>
+                            `,
+                            formula: "Compare relationships: Worker-Tool, Cause-Effect, Synonym-Antonym, and base mathematical squares.",
+                            quiz: [
+                                {
+                                    q: "Bicycle : Pedal :: Car : ?",
+                                    options: ["Accelerator", "Engine", "Steering", "Wheel"],
+                                    ans: 0,
+                                    exp: "A pedal accelerates or drives a bicycle, and an accelerator drives a car."
+                                },
+                                {
+                                    q: "Find the odd one out: 64, 125, 216, 256",
+                                    options: ["256", "64", "125", "216"],
+                                    ans: 0,
+                                    exp: "64 (4³), 125 (5³), and 216 (6³) are perfect cubes. 256 (16²) is a square but not a cube."
+                                },
+                                {
+                                    q: "Thermometer : Temperature :: Hygrometer : ?",
+                                    options: ["Humidity", "Pressure", "Wind speed", "Depth"],
+                                    ans: 0,
+                                    exp: "Thermometer measures temperature, and hygrometer measures atmospheric humidity."
+                                }
+                            ]
+                        },
+                        "series": {
+                            title: "Number & Alphabet Series",
+                            notes: `
+                                <section>
+                                    <p>Find the next item in sequences of numbers or letters by tracking increment patterns or alphabet jumps.</p>
+                                </section>
+                            `,
+                            formula: "Check difference first, then multipliers, then alternate terms.",
+                            quiz: [
+                                {
+                                    q: "Complete the series: 5, 11, 23, 47, ?",
+                                    options: ["95", "90", "96", "100"],
+                                    ans: 0,
+                                    exp: "Pattern is: x2 + 1. 5*2+1=11, 11*2+1=23, 23*2+1=47, 47*2+1=95."
+                                },
+                                {
+                                    q: "Complete the alphabet series: C, F, I, L, ?",
+                                    options: ["O", "P", "N", "M"],
+                                    ans: 0,
+                                    exp: "Letters shift by +3 positions: C(+3)->F(+3)->I(+3)->L(+3)->O."
+                                },
+                                {
+                                    q: "Complete the series: 2, 6, 12, 20, 30, ?",
+                                    options: ["42", "40", "45", "38"],
+                                    ans: 0,
+                                    exp: "Differences are consecutive even integers: +4, +6, +8, +10. Next is +12. 30 + 12 = 42."
+                                }
+                            ]
+                        },
+                        "coding": {
+                            title: "Coding & Decoding",
+                            notes: `
+                                <section>
+                                    <p>Decrypt shifting letters or numbers based on rules to code other words.</p>
+                                </section>
+                            `,
+                            formula: "Write A-Z rankings forward (A=1) and backward (Z=1) on scratch paper for quick lookups.",
+                            quiz: [
+                                {
+                                    q: "If LION is coded as MJP O, how is TIGER coded?",
+                                    options: ["UJHFS", "UJKHS", "UIGFS", "UJHFR"],
+                                    ans: 0,
+                                    exp: "Each letter is shifted by +1: L+1=M, I+1=J, O+1=P, N+1=O. For TIGER: T+1=U, I+1=J, G+1=H, E+1=F, R+1=S."
+                                },
+                                {
+                                    q: "If RED is coded as 27, how is BLUE coded?",
+                                    options: ["40", "35", "42", "38"],
+                                    ans: 0,
+                                    exp: "RED sum of alphabetical positions: R=18, E=5, D=4 (18+5+4 = 27). For BLUE: B=2, L=12, U=21, E=5 (2+12+21+5 = 40)."
+                                },
+                                {
+                                    q: "If SUN is coded as USN, how is STAR coded?",
+                                    options: ["TSAR", "SART", "RATS", "TARS"],
+                                    ans: 0,
+                                    exp: "The first two letters are swapped: S-U becomes U-S, leaving N. For STAR: swap S-T to T-S, leaving A-R. Hence, TSAR."
+                                }
+                            ]
+                        }
+                    }
+                },
+                "science": {
+                    title: "General Science",
+                    topics: {
+                        "physics": {
+                            title: "Physics Applications",
+                            notes: `
+                                <section>
+                                    <p>Understand physical concepts of Work, Energy, Power, Gravitation, Newton's Laws, Optics, and core SI units.</p>
+                                </section>
+                            `,
+                            formula: "F = ma, W = Fd, P = W/t. Speed of light = 3 * 10^8 m/s.",
+                            quiz: [
+                                {
+                                    q: "What is the SI unit of power?",
+                                    options: ["Watt", "Joule", "Newton", "Pascal"],
+                                    ans: 0,
+                                    exp: "Watt is the SI unit of power, representing one Joule of work per second. Newton is force, Pascal is pressure, Joule is energy."
+                                },
+                                {
+                                    q: "An object is placed at the center of curvature of a concave mirror. Where is the image formed?",
+                                    options: ["At the center of curvature", "At focus", "Between focus and center", "Infinite distance"],
+                                    ans: 0,
+                                    exp: "For a concave mirror, when the object is at the center of curvature (C), the image is also formed at C, real, inverted, and equal in size."
+                                },
+                                {
+                                    q: "What is the escape velocity of Earth?",
+                                    options: ["11.2 km/s", "9.8 km/s", "42 km/s", "7.0 km/s"],
+                                    ans: 0,
+                                    exp: "The escape velocity required to escape Earth's gravitational field is approximately 11.2 km/s."
+                                }
+                            ]
+                        },
+                        "chemistry": {
+                            title: "Chemistry Basics",
+                            notes: `
+                                <section>
+                                    <p>Covers elements, periodic table, reactions, acids & bases, pH values, chemical salts, and carbon compounds.</p>
+                                </section>
+                            `,
+                            formula: "Baking soda: NaHCO3. Washing soda: Na2CO3. Bleaching powder: CaOCl2. pH < 7 is acidic, pH > 7 is basic.",
+                            quiz: [
+                                {
+                                    q: "What is the chemical name of common salt?",
+                                    options: ["Sodium Chloride", "Sodium Bicarbonate", "Calcium Carbonate", "Sodium Carbonate"],
+                                    ans: 0,
+                                    exp: "Common salt is Sodium Chloride (NaCl)."
+                                },
+                                {
+                                    q: "What is the pH value of pure water?",
+                                    options: ["7", "0", "14", "5.6"],
+                                    ans: 0,
+                                    exp: "Pure water is neutral, having a pH value of exactly 7 at room temperature."
+                                },
+                                {
+                                    q: "Which gas is released when an acid reacts with metals?",
+                                    options: ["Hydrogen", "Oxygen", "Carbon dioxide", "Nitrogen"],
+                                    ans: 0,
+                                    exp: "Acids react with active metals to produce hydrogen gas (H2) and a corresponding metal salt."
+                                }
+                            ]
+                        },
+                        "biology": {
+                            title: "Life Sciences (Biology)",
+                            notes: `
+                                <section>
+                                    <p>Covers human organ functions, blood circulation systems, vitamins deficiency diseases, plant kingdom, and pathogens.</p>
+                                </section>
+                            `,
+                            formula: "Vitamin A deficiency -> Night blindness. Vitamin C -> Scurvy. Vitamin D -> Rickets. Vitamin B1 -> Beriberi.",
+                            quiz: [
+                                {
+                                    q: "Scurvy is caused due to the deficiency of which vitamin?",
+                                    options: ["Vitamin C", "Vitamin A", "Vitamin B", "Vitamin D"],
+                                    ans: 0,
+                                    exp: "Scurvy is a disease characterized by bleeding gums and slow wound healing, caused by a lack of Vitamin C (ascorbic acid)."
+                                },
+                                {
+                                    q: "Which organ in the human body is responsible for filtering blood and producing urine?",
+                                    options: ["Kidneys", "Liver", "Lungs", "Heart"],
+                                    ans: 0,
+                                    exp: "Kidneys filter metabolic wastes, toxins, and excess salts from the bloodstream to produce urine."
+                                },
+                                {
+                                    q: "Which component of blood is responsible for clotting at the site of injury?",
+                                    options: ["Platelets", "Red Blood Cells", "White Blood Cells", "Plasma"],
+                                    ans: 0,
+                                    exp: "Platelets (thrombocytes) aggregate at the site of a cut to initiate blood clotting and stop bleeding."
+                                }
+                            ]
+                        }
+                    }
+                },
+                "awareness": {
+                    title: "General Awareness",
+                    topics: {
+                        "history": {
+                            title: "Indian History & Freedom Struggle",
+                            notes: `
+                                <section>
+                                    <p>Covers Ancient dynasties, Delhi Sultanate, Mughals, European advent, and major INC events (1885 - 1947).</p>
+                                </section>
+                            `,
+                            formula: "Chronology is key: 1915 Gandhi returns -> 1920 Non-cooperation -> 1930 Dandi March -> 1942 Quit India.",
+                            quiz: [
+                                {
+                                    q: "Who was the founder of the Brahmo Samaj in 1828?",
+                                    options: ["Raja Ram Mohan Roy", "Swami Vivekananda", "Dayananda Saraswati", "Ishwar Chandra Vidyasagar"],
+                                    ans: 0,
+                                    exp: "Raja Ram Mohan Roy established the Brahmo Samaj in 1828 to promote monotheism and reform Hindu social rituals."
+                                },
+                                {
+                                    q: "Under whose viceroyalty was the Partition of Bengal declared in 1905?",
+                                    options: ["Lord Curzon", "Lord Mountbatten", "Lord Ripon", "Lord Dalhousie"],
+                                    ans: 0,
+                                    exp: "Lord Curzon declared the Partition of Bengal in 1905, triggering the Swadeshi Movement."
+                                },
+                                {
+                                    q: "In which year did the Battle of Buxar take place?",
+                                    options: ["1764", "1757", "1761", "1799"],
+                                    ans: 0,
+                                    exp: "The Battle of Buxar was fought on October 22, 1764, consolidating British rule in Bengal."
+                                }
+                            ]
+                        },
+                        "polity": {
+                            title: "Indian Polity & Constitution",
+                            notes: `
+                                <section>
+                                    <p>Articles, schedules, parts of the Constitution, Parliament powers, states governance, and amendment systems.</p>
+                                </section>
+                            `,
+                            formula: "Recall: Part III = Fundamental Rights; Part IV = DPSPs; Part IV-A = Fundamental Duties.",
+                            quiz: [
+                                {
+                                    q: "How many Fundamental Duties are listed under Article 51-A of the Indian Constitution?",
+                                    options: ["11", "10", "6", "12"],
+                                    ans: 0,
+                                    exp: "The 86th Amendment in 2002 added the 11th fundamental duty (education for children). Originally, the 42nd Amendment had added 10 duties in 1976."
+                                },
+                                {
+                                    q: "Which constitutional amendment is known as the 'Mini-Constitution'?",
+                                    options: ["42nd Amendment", "44th Amendment", "86th Amendment", "52nd Amendment"],
+                                    ans: 0,
+                                    exp: "The 42nd Amendment Act (1976), enacted during Emergency, introduced wide-ranging changes, earning the name 'Mini-Constitution'."
+                                },
+                                {
+                                    q: "What is the minimum age to be eligible for voting in Indian elections?",
+                                    options: ["18 years", "21 years", "25 years", "16 years"],
+                                    ans: 0,
+                                    exp: "The 61st Amendment Act in 1989 lowered the voting age from 21 to 18 years."
+                                }
+                            ]
+                        },
+                        "railwaysgk": {
+                            title: "Indian Railways General Knowledge",
+                            notes: `
+                                <section>
+                                    <p>Important details: First train (1853, Bombay to Thane), administrative division zones (currently 18), railway boards, and current technological initiatives (Kavach collision systems, Vande Bharat trains).</p>
+                                </section>
+                            `,
+                            formula: "Know the core zones: Northern (New Delhi), Southern (Chennai), Western (Mumbai CST), Eastern (Kolkata).",
+                            quiz: [
+                                {
+                                    q: "In which year did the first passenger train run in India?",
+                                    options: ["1853", "1850", "1857", "1901"],
+                                    ans: 0,
+                                    exp: "The first passenger train in India ran between Bori Bunder (Bombay) and Thane on April 16, 1853, covering 34 km."
+                                },
+                                {
+                                    q: "Where is the headquarters of the Southern Railway zone located?",
+                                    options: ["Chennai", "Secunderabad", "Hubli", "Trichy"],
+                                    ans: 0,
+                                    exp: "The Southern Railway zone is headquartered in Chennai, Tamil Nadu."
+                                },
+                                {
+                                    q: "What is the name of the indigenous automatic train protection (ATP) system developed in India?",
+                                    options: ["Kavach", "Suraksha", "Rudra", "Nethra"],
+                                    ans: 0,
+                                    exp: "Kavach is the automatic collision avoidance system designed by Research Designs and Standards Organisation (RDSO) in India."
+                                }
+                            ]
+                        }
+                    }
+                }
+            }
         }
     };
 
